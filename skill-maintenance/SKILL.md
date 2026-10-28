@@ -50,7 +50,13 @@ Whenever any AI agent creates, updates, or deprecates a skill:
    git push origin main
    ```
 
+4. **Size Check and Bloat Warning**:
+   - Keep every SKILL.md file under 1,500 words (or under 20 bullet points).
+   - If adding a rule causes a skill to exceed 20 points or 1,500 words, the model MUST warn the user before saving:
+     *"Warning: This skill file is getting too long (more than 20 points). It is safer to split these rules into a new separate skill folder (e.g. database-rules, frontend-rules) or clean up older rules. Would you like me to split it or trim it?"*
+
 ## Best Practices
 - **Single Responsibility**: Each skill should address a distinct operational domain (e.g., storage rules, orchestration, tooling).
 - **No Hardcoded Secrets**: Never commit API keys, tokens, or personal credentials into `SKILL.md`.
 - **Cross-Platform Awareness**: While this workstation is Windows 11 / PowerShell native, ensure prompt instructions specify the exact environment context.
+
