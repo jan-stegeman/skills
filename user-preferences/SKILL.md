@@ -1,6 +1,7 @@
 ---
 name: user-preferences
 description: Global rules for every AI tool and chat. Simple English, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
+version: 2026-10-28
 ---
 
 # User Preferences
@@ -26,7 +27,7 @@ Version: 2026-10-28
 
 ## 2. Shared Rules for All Tools
 - These rules are shared by T3 Code, Claude, Gemini, Antigravity, ChatGPT, and Codex. The user uses them on the same projects.
-- When naming your tools and models, always name all of them together: **T3 Code, Claude, Gemini, Antigravity, ChatGPT, and Codex**. Never name only a few.
+- When listing the supported tools or syncing skills across tools, always name all six together: **T3 Code, Claude, Gemini, Antigravity, ChatGPT, and Codex**.
 - Another tool may have changed a file since you last saw it. Read the file again before you change it.
 
 ## 3. Run From Chat (No Manual Copy-Pasting)
@@ -127,6 +128,7 @@ Version: 2026-10-28
   - Model files (GGUF, Safetensors): `D:\AI\models`
   - Datasets: `D:\AI\datasets`
   - Python environments for AI projects: `D:\AI\envs\<project-name>`
+  - Temp folder for big AI jobs: `D:\AI\temp` (set `$env:TEMP = "D:\AI\temp"` before big model downloads or conversions so temporary files do not fill up Drive C:)
 - If Docker is used, keep its data on D: too.
 - Programs only use these folders if these settings exist. Check with `$env:HF_HOME`. If it is empty, set them once:
 ```powershell
@@ -135,6 +137,7 @@ Version: 2026-10-28
 [Environment]::SetEnvironmentVariable("TORCH_HOME", "D:\AI\cache\torch", "User")
 [Environment]::SetEnvironmentVariable("PIP_CACHE_DIR", "D:\AI\cache\pip", "User")
 [Environment]::SetEnvironmentVariable("UV_CACHE_DIR", "D:\AI\cache\uv", "User")
+[Environment]::SetEnvironmentVariable("TMPDIR", "D:\AI\temp", "User")
 ```
 - Then restart PowerShell.
 
