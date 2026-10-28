@@ -1,4 +1,4 @@
-﻿# AI Agent Skills Repository
+# AI Agent Skills Repository
 
 Central repository of Agent Skills, user preferences, and hardware-accelerated profiles for **T3 Code, Claude, Antigravity, Gemini, and OpenAI (ChatGPT/Codex)**.
 
@@ -9,13 +9,10 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 | Skill | Description |
 | :--- | :--- |
 | [**`user-preferences`**](user-preferences/SKILL.md) | Communication profile (Plain English & Dutch mirroring), didactic explanations, hardware specifications, 24-hour time, and metric units. |
-| [**`storage-rules`**](storage-rules/SKILL.md) | Storage rules: OS drive `C:` is strictly for system and apps; all models, checkpoints, datasets, and caches reside on `D:\AI\`. |
 | [**`local-model-runner`**](local-model-runner/SKILL.md) | Sizing heuristics and acceleration strategies for local models (Ollama, vLLM, llama.cpp) on the AMD Threadripper 3990X and RTX 3090. |
-| [**`powershell-dev-ops`**](powershell-dev-ops/SKILL.md) | Windows 11 & PowerShell automation conventions (safe path quoting, native cmdlets, no Linux bashisms). |
 | [**`git-worktree-flow`**](git-worktree-flow/SKILL.md) | Safe, non-blocking parallel workflows using Git worktrees and Conventional Commits. |
 | [**`t3-orchestration-patterns`**](t3-orchestration-patterns/SKILL.md) | Multi-agent execution guidelines in T3 Code (subagents vs. delegates vs. background tasks). |
 | [**`skill-maintenance`**](skill-maintenance/SKILL.md) | Automated lifecycle for creating, updating, and pushing skills directly to this GitHub repository. |
-| [**`python-rules`**](python-rules/SKILL.md) | Guidelines for Python virtual environments and tooling on Windows 11. |
 
 ---
 

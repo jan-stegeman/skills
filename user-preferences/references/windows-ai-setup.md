@@ -19,7 +19,7 @@ Check the current and saved values before replacing any settings:
 ```powershell
 $aiSettingNames = @(
     'HF_HOME', 'OLLAMA_MODELS', 'TORCH_HOME', 'PIP_CACHE_DIR',
-    'UV_CACHE_DIR', 'TEMP', 'TMP', 'TMPDIR'
+    'UV_CACHE_DIR', 'UV_PYTHON_INSTALL_DIR', 'TEMP', 'TMP', 'TMPDIR'
 )
 foreach ($settingName in $aiSettingNames) {
     [pscustomobject]@{
@@ -49,6 +49,7 @@ $aiPaths = [ordered]@{
     TORCH_HOME = 'D:\AI\cache\torch'
     PIP_CACHE_DIR = 'D:\AI\cache\pip'
     UV_CACHE_DIR = 'D:\AI\cache\uv'
+    UV_PYTHON_INSTALL_DIR = 'D:\AI\uv\python'
     TEMP = 'D:\AI\temp'
     TMP = 'D:\AI\temp'
     TMPDIR = 'D:\AI\temp'
@@ -59,7 +60,7 @@ foreach ($setting in $aiPaths.GetEnumerator()) {
     Set-Item -Path ('Env:\' + $setting.Key) -Value $setting.Value -ErrorAction Stop
 }
 
-foreach ($folder in @('D:\AI\models', 'D:\AI\datasets', 'D:\AI\envs', 'D:\AI\logs')) {
+foreach ($folder in @('D:\AI\models', 'D:\AI\datasets', 'D:\AI\envs', 'D:\AI\logs', 'D:\AI\uv\python')) {
     New-Item -ItemType Directory -Path $folder -Force -ErrorAction Stop | Out-Null
 }
 ```
@@ -75,7 +76,7 @@ Use the values from section 2. Leave Windows-wide temp settings alone.
 
 ```powershell
 $cacheSettingNames = @(
-    'HF_HOME', 'OLLAMA_MODELS', 'TORCH_HOME', 'PIP_CACHE_DIR', 'UV_CACHE_DIR'
+    'HF_HOME', 'OLLAMA_MODELS', 'TORCH_HOME', 'PIP_CACHE_DIR', 'UV_CACHE_DIR', 'UV_PYTHON_INSTALL_DIR'
 )
 foreach ($settingName in $cacheSettingNames) {
     $expectedPath = $aiPaths[$settingName]
