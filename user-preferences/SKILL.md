@@ -2,7 +2,7 @@
 name: user-preferences
 description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-10-29"
+  version: "2026-10-29.1"
 ---
 
 # User Preferences
@@ -98,7 +98,7 @@ metadata:
   - `OLLAMA_MODELS`: `D:\AI\ollama\models`
   - `TORCH_HOME`: `D:\AI\cache\torch`
   - `PIP_CACHE_DIR`: `D:\AI\cache\pip`
-  - `UV_CACHE_DIR`: `D:\AI\cache\uv`
+  - `UV_CACHE_DIR`: `D:\AI\cache\uv`; `UV_PYTHON_INSTALL_DIR`: `D:\AI\uv\python`
   - Models: `D:\AI\models`; datasets: `D:\AI\datasets`
   - Environments: `D:\AI\envs\<project-name>`; temp: `D:\AI\temp`
 - Before big jobs, check folders exist, are writable, and have room for downloads and results.
@@ -115,9 +115,9 @@ metadata:
 
 ## 17. Python and AI Tools
 - Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
-- Always use `uv` for managing environments and packages (`uv venv`, `uv pip`, `uv run`).
+- Always use `uv`. Point commands to the project environment: `uv pip install --python "D:\AI\envs\<project>\Scripts\python.exe" ...` (or set `$env:UV_PROJECT_ENVIRONMENT = "D:\AI\envs\<project>"` for `uv run`).
 - Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
-- Use an available Python launcher; calling the environment's `python.exe` directly avoids activation issues.
+- Use an available Python launcher and call the environment's `python.exe` directly to avoid activation issues.
 - Install PyTorch with CUDA support via `uv pip` using the official PyTorch wheel index.
 - For PyTorch GPU jobs, verify `torch.cuda.is_available()` is `True` using that environment's Python.
 - Save package versions with `uv pip freeze` so the setup can be rebuilt.

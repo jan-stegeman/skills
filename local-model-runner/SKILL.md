@@ -40,8 +40,7 @@ description: Execution rules, sizing heuristics, and acceleration strategies for
   import torch
 
   # Utilize Threadripper cores effectively
-  # Test thread scaling (e.g. 32 to 64 threads)
-  torch.set_num_threads(64)
+  torch.set_num_threads(32)  # Start at 32; test 32 to 64 and keep the fastest
   torch.set_num_interop_threads(16)
   ```
 - Use native Windows CUDA device indexing (`CUDA_VISIBLE_DEVICES="0"`).
