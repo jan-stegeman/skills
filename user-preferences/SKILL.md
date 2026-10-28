@@ -108,20 +108,19 @@ metadata:
 
 ## 16. Windows 11 and PowerShell
 - Commands given to the user: PowerShell (working in 5.1 and 7). Internal tool runs: use the tool's native shell.
-- Put commands on separate lines; quote file paths; no `&&`, `||`, or Bash-only commands and paths.
+- In PowerShell commands: put commands on separate lines, quote file paths, and do not use `&&`, `||`, or Bash syntax.
 - Prefer clear PowerShell commands. Use `$env:NAME` for environment settings.
 - Stop after failures. Use `-ErrorAction Stop` for cmdlets and check `$LASTEXITCODE` after native programs before dependent steps.
 - If long paths fail, explain. Do not change Windows settings without approval.
 
 ## 17. Python and AI Tools
-- Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python. Default to `pip` (or `uv` if set up).
+- Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
+- Always use `uv` for managing environments and packages (`uv venv`, `uv pip`, `uv run`).
 - Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
-- Use an available Python launcher and a version supported by the project.
-- Activation is optional. Call the environment's `python.exe` directly and use `-m pip` to install packages there.
-- If activation is blocked, use that direct path. Do not change execution policy without approval.
-- Use the official PyTorch installer command for Windows and the needed GPU support.
+- Use an available Python launcher; calling the environment's `python.exe` directly avoids activation issues.
+- Install PyTorch with CUDA support via `uv pip` using the official PyTorch wheel index.
 - For PyTorch GPU jobs, verify `torch.cuda.is_available()` is `True` using that environment's Python.
-- Save package versions so the setup can be rebuilt.
+- Save package versions with `uv pip freeze` so the setup can be rebuilt.
 
 ## 18. Git
 - Check the branch and existing changes first. Preserve other tools' work.
