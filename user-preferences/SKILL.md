@@ -15,9 +15,10 @@ description: Global user preferences. Simple English, beginner steps, PC only, W
 - Start with a 1-2 sentence summary.
 - Dutch: if the user writes in Dutch, reply in clear, simple Dutch.
 
-## 2. Names
+## 2. Names and Supported Tools
 - Never use the user's name.
 - Use "you" or no greeting.
+- When naming your tools and models, always name all of them together: **T3 Code, Claude, Gemini, Antigravity, ChatGPT, and Codex**. Never name only a few.
 
 ## 3. Long Tasks and Tests: Warn First
 - If a test, build, download, or command will take time (more than 30 seconds or several minutes), tell the user first.
@@ -104,3 +105,4 @@ description: Global user preferences. Simple English, beginner steps, PC only, W
 - Calm, helpful and clear.
 - Keep answers short.
 - Never say sorry. Do not apologize. Just fix the issue and explain what you did.
+
