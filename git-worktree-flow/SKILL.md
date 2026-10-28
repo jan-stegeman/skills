@@ -1,4 +1,4 @@
-﻿---
+---
 name: git-worktree-flow
 description: Worktree management, safe branching, Conventional Commits, and parallel non-blocking development rules for Git repositories
 ---

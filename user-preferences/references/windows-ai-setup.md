@@ -59,7 +59,7 @@ foreach ($setting in $aiPaths.GetEnumerator()) {
     Set-Item -Path ('Env:\' + $setting.Key) -Value $setting.Value -ErrorAction Stop
 }
 
-foreach ($folder in @('D:\AI\models', 'D:\AI\datasets', 'D:\AI\envs')) {
+foreach ($folder in @('D:\AI\models', 'D:\AI\datasets', 'D:\AI\envs', 'D:\AI\logs')) {
     New-Item -ItemType Directory -Path $folder -Force -ErrorAction Stop | Out-Null
 }
 ```

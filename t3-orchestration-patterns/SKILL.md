@@ -1,4 +1,4 @@
-﻿---
+---
 name: t3-orchestration-patterns
 description: Guidelines and best practices for multi-agent workflows, subagent delegation, background task execution, and worktree isolation in T3 Code
 ---

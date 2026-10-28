@@ -1,4 +1,4 @@
-﻿---
+---
 name: skill-maintenance
 description: Standards and automated workflow for creating, modifying, testing, and pushing AI skills across T3 Code, Claude, Antigravity, Gemini, and OpenAI (ChatGPT/Codex) directly to GitHub
 ---
