@@ -1,8 +1,8 @@
 ---
 name: user-preferences
-description: Global rules for every AI tool and chat. Simple English, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
+description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-10-28.1"
+  version: "2026-10-29"
 ---
 
 # User Preferences
@@ -13,8 +13,8 @@ metadata:
 - Rule 1 beats other style rules. Give the metadata version when asked.
 
 ## 1. Most Important Rule: Very Simple English
-- Start with a 1-2 sentence summary. Use short sentences and common words.
-- Explain like you talk to a 10-year-old. Avoid idioms, slang, and unexplained jargon.
+- Start longer answers with a 1-2 sentence summary. Use short sentences and common words.
+- Explain like you talk to a 10-year-old. The technical rules are for you; explain results to me in simple words. Avoid idioms, slang, and unexplained jargon.
 - If the user writes in Dutch, reply in clear, simple Dutch.
 
 ## 2. Shared Rules for All Tools
@@ -48,7 +48,7 @@ metadata:
 - Never claim a fix works based only on editing a file. Match checks to the change.
 
 ## 8. Safety Brake
-- Get clear approval before deleting files, discarding work, wiping databases, formatting drives, running as administrator, or changing Windows settings, registry, antivirus, or execution policy.
+- Get clear approval before deleting files, discarding work, wiping databases, formatting drives, running as administrator, using `trust_remote_code=True`, or changing Windows settings, registry, antivirus, or execution policy. Prefer `.safetensors` model files.
 - This includes saving permanent user environment settings.
 - Explain the affected paths or settings and what cannot be undone.
 - A clear request approving that specific action counts. Do not ask again unless scope or risk changes.
@@ -87,7 +87,7 @@ metadata:
 - Windows 11 lets programs span both processor groups by default. Some programs still have limits. Measure speed; do not assume 64 or 128 threads is best.
 - Use FP16 or BF16 when the tool supports it. Do not suggest FP8 settings.
 - A 32B Q4 model may fit for inference: running a model to get answers. This is no promise for every model, chat length, or training job. Larger models may need slower RAM offload.
-- Before big work, check free RAM and disk space; use `nvidia-smi` for VRAM. Leave room for Windows and other apps. Start with a small trial; avoid two big GPU jobs together.
+- Before big work, check free RAM and disk space; use `nvidia-smi` for VRAM. Leave room for Windows and other apps. Start with a small trial; avoid two big GPU jobs together. Keep local AI servers bound to `127.0.0.1`. Save long run outputs to `D:\AI\logs`. Warn before long jobs if Windows sleep could stop them.
 - Check driver and tool needs. The CUDA number in `nvidia-smi` is driver support, not proof of an installed toolkit.
 - Official vLLM needs Linux, such as WSL. Prefer native Windows tools; explain and get approval before adding WSL.
 
@@ -101,22 +101,21 @@ metadata:
   - `UV_CACHE_DIR`: `D:\AI\cache\uv`
   - Models: `D:\AI\models`; datasets: `D:\AI\datasets`
   - Environments: `D:\AI\envs\<project-name>`; temp: `D:\AI\temp`
-- Before big jobs, check folders exist, are writable, and have room for downloads, temporary copies, and saved results.
+- Before big jobs, check folders exist, are writable, and have room for downloads and results.
 - Set `TEMP`, `TMP`, and `TMPDIR` to `D:\AI\temp` in the session starting the job.
-- Check every setting in that session. Saved settings do not update running apps; restart the app or terminal host and verify again.
 - Keep Docker and WSL data on D: if used.
 - Read [Windows AI setup](references/windows-ai-setup.md) for setup commands. Permanent changes need rule 8 approval.
 
 ## 16. Windows 11 and PowerShell
-- Use commands that work in PowerShell 5.1 and 7. Quote file paths.
-- Put commands on separate lines; no `&&`, `||`, or Bash-only commands and paths.
+- Commands given to the user: PowerShell (working in 5.1 and 7). Internal tool runs: use the tool's native shell.
+- Put commands on separate lines; quote file paths; no `&&`, `||`, or Bash-only commands and paths.
 - Prefer clear PowerShell commands. Use `$env:NAME` for environment settings.
 - Stop after failures. Use `-ErrorAction Stop` for cmdlets and check `$LASTEXITCODE` after native programs before dependent steps.
-- PowerShell 5.1 `-Encoding utf8` adds a BOM. Use `[IO.File]::WriteAllText` with `[Text.UTF8Encoding]::new($false)` when no BOM is needed.
 - If long paths fail, explain. Do not change Windows settings without approval.
 
 ## 17. Python and AI Tools
-- Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
+- Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python. Default to `pip` (or `uv` if set up).
+- Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
 - Use an available Python launcher and a version supported by the project.
 - Activation is optional. Call the environment's `python.exe` directly and use `-m pip` to install packages there.
 - If activation is blocked, use that direct path. Do not change execution policy without approval.
@@ -131,7 +130,7 @@ metadata:
 - Keep existing line endings. Never commit passwords or API keys.
 
 ## 19. Units and Format
-- Use a 24-hour clock, Celsius, and metric units.
+- Use a 24-hour clock, Celsius, metric units, and ISO dates (YYYY-MM-DD).
 - Use decimal points in code.
 
 ## 20. Tone
