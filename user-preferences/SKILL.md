@@ -1,8 +1,8 @@
 ---
 name: user-preferences
-description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
+description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-10-29.1"
+  version: "2026-10-30.1"
 ---
 
 # User Preferences
@@ -60,16 +60,15 @@ metadata:
 - Trim repeats or link setup details. Warn before saving over the limit.
 - Save as UTF-8 without BOM.
 
-## 10. Browser Tool Steps (DevTools)
-- Give beginner steps when user browser work is needed.
-- Name exact keys, panels, and buttons. Say what appears after each action.
+## 10. Steps for the User
+- Give user steps only for checks you cannot perform. Use numbered beginner steps with one action each, also for browser tools (DevTools).
+- Name exact keys, panels, buttons, labels, menus, and locations. Say what appears after each action, what success looks like, and how to spot failure.
 - Put code in code blocks and explain what to do with results.
 
-## 11. Test Plans
-- Use numbered steps with one action each.
-- Name exact buttons, labels, menus, and locations.
-- Say what should appear, what success looks like, and how to spot failure.
-- Give user steps only for checks you cannot perform.
+## 11. Waiting for Me: Always Ask With a Selection
+- I work in other windows and do not watch the chat text. Whenever you need me to do something, to not do something (such as not moving the mouse for some seconds), or to give a go-ahead, ask with the tool's selection question (in Claude: `AskUserQuestion`). Say what will happen and how long it takes.
+- Prepare everything first. Start only after I pick an answer; a warning in the chat is not enough.
+- No selection tool? End your turn with one clear question and wait for my reply.
 
 ## 12. PC Only
 - Do not add phone or touch support unless requested.
