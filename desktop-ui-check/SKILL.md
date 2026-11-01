@@ -25,27 +25,24 @@ Check every label, button, notification, error and confirmation.
 2. **A button says what it does.** Prefer "Delete history" over "OK". Windows' own Yes and No buttons are fine when a custom window would be too much work; then the question must be clear by itself.
 3. **Say what cannot be undone,** and before it happens.
 4. **Use one word for one thing everywhere:** in the program, the manual and the screenshots.
-5. **Name no technical cause when the user cannot act on it.** Keep such detail for the log.
-6. **Keep it short and plain.** Check the longest text in the window that holds it.
+5. **Keep it short and plain.** Name no technical cause when the user cannot act on it; keep such detail for the log.
 
 ## Part 2: Colours
 
 Measure the contrast with the WCAG formula. The minimum is 4.5:1 for normal text, 3:1 for large or bold text of at least 18.66 pixels, and 3:1 for a border or icon that is the only sign of a control.
 
-1. **Check every theme.** A program looks right in the theme the developer uses; the fault is often in the other one.
-2. **Check every background a colour is used on,** such as the window and a lighter panel.
-3. **Find how each colour is really used.** A colour meant for large text may also be used for small text. Use the rule for its smallest use.
-4. **Measure real pixels in a screenshot.** The theme file is not enough: a colour can come from somewhere else, such as a tray icon colour used as text. Take the darkest pixel of the letters on a light background, or the lightest on a dark one, as the edges of letters are blended.
-5. **Keep a colour test in the project,** at 4.5:1, for all colours of text in all themes. A lower limit lets the fault stay.
-6. **Colour is never the only signal.** A state also has a word or a shape, such as "● Stopped".
+1. **Check every theme and every background.** A program looks right in the theme the developer uses; the fault is often in the other one. A colour can also sit on both the window and a lighter panel.
+2. **Find how each colour is really used.** A colour meant for large text may also be used for small text. Use the rule for its smallest use.
+3. **Measure real pixels in a screenshot.** The theme file is not enough: a colour can come from somewhere else, such as a tray icon colour used as text. Take the darkest pixel of the letters on a light background, or the lightest on a dark one, as the edges of letters are blended.
+4. **Keep a colour test in the project,** at 4.5:1, for all colours of text in all themes. A lower limit lets the fault stay.
+5. **Colour is never the only signal.** A state also has a word or a shape, such as "● Stopped".
 
 ## Part 3: Keyboard
 
 1. Every control can be reached with Tab, in a logical order.
 2. Focus can be seen on every control, in every theme.
-3. Enter does the main action and Esc closes or cancels, where the user expects that.
-4. Scrolling areas work with the keyboard and the mouse wheel.
-5. A small window that appears does not steal focus from the program the user types in, unless it is meant to.
+3. Enter does the main action and Esc closes or cancels, where the user expects that. Scrolling areas work with the keyboard and the mouse wheel.
+4. A small window that appears does not steal focus from the program the user types in, unless it is meant to.
 
 Record each control that fails, with the window and the tab it is on.
 
