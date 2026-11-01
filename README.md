@@ -13,6 +13,7 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 | [**`git-worktree-flow`**](git-worktree-flow/SKILL.md) | Safe, non-blocking parallel workflows using Git worktrees and Conventional Commits. |
 | [**`t3-orchestration-patterns`**](t3-orchestration-patterns/SKILL.md) | Multi-agent execution guidelines in T3 Code (subagents vs. delegates vs. background tasks). |
 | [**`skill-maintenance`**](skill-maintenance/SKILL.md) | Automated lifecycle for creating, updating, and pushing skills directly to this GitHub repository. |
+| [**`desktop-ui-check`**](desktop-ui-check/SKILL.md) | Read-only review of a Windows desktop program: wording, measured colour contrast, keyboard use, screen states, and a check per release. |
 
 ---
 
