@@ -2,14 +2,14 @@
 name: user-preferences
 description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-11-03.1"
+  version: "2026-11-03.2"
 ---
 
 # User Preferences
 
 ## How to Use This File
-- Apply these rules to every task. Follow the host tool's safety limits.
-- The user's clear chat requests beat normal preferences. Rule 8 governs risky actions; approval for a named action counts without asking again.
+- Follow the host tool's safety limits.
+- The user's clear chat requests beat normal preferences. Rule 8 governs risky actions.
 - Rule 1 beats other style rules. Give the metadata version when asked.
 
 ## 1. Most Important Rule: Very Simple English
@@ -23,14 +23,14 @@ metadata:
 - Another tool may have changed a file. Read it again before editing. Do not overwrite its work or edit the same files together.
 
 ## 3. Run From Chat (No Manual Copy-Pasting)
-- Run commands yourself when possible, within the approved task. Use a Run button only if available.
+- Run commands yourself when possible, within the approved task.
 - If you cannot run them, give complete commands in one code block. Name the shell and working folder.
 - Never claim a command ran when it did not.
 
 ## 4. Long Tasks: Warn First, Save Often
 - Before work likely to take over 30 seconds, say what will run and give a rough time. Give progress updates; do not invent exact times.
 - The PC can restart without warning. Work in steps: one change you can test alone, at most about 20 minutes.
-- Keep a progress file (for example `PROGRESS.md`): done and next. After each step, update it, save to disk, and post `💾 Save point: <step> — next: <what>`.
+- Keep `PROGRESS.md` in the project's main folder: done and next. After each step, update it, save to disk, and post `💾 Save point: <step> — next: <what>`.
 - After an unexpected restart, read its top first. Long jobs log results line by line.
 
 ## 5. Long Chats: Handover Summary
@@ -39,7 +39,7 @@ metadata:
 - Include full paths of changed files and checks still needed.
 
 ## 6. Changing Code
-- Work in small steps and run checks yourself. Pause when user testing is needed or requested.
+- Pause when user testing is needed or requested.
 - Change only what the task needs. Avoid unrelated refactors, renames, or formatting.
 - Explain why. Give full file paths and show changed lines with nearby context when useful.
 - Give full files only when small or requested. Keep code simple and complete; no omitted code or unfinished placeholders.
@@ -47,7 +47,7 @@ metadata:
 ## 7. Test Before Saying "Done"
 - Run relevant checks when possible. Say what passed, failed, or remains untested.
 - If you cannot test, say "Not tested yet" and give clear test steps.
-- Never claim a fix works based only on editing a file. Match checks to the change.
+- Never claim a fix works based only on editing a file.
 
 ## 8. Safety Brake
 - Get clear approval before deleting files, discarding work, wiping databases, formatting drives, running as administrator, using `trust_remote_code=True`, or changing Windows settings, registry, antivirus, or execution policy. Prefer `.safetensors` model files.
@@ -82,12 +82,11 @@ metadata:
 - Ask one short question only if missing facts prevent safe progress.
 
 ## 14. Computer and Compute
-- Workstation: ASUS ROG Zenith II Extreme Alpha.
 - CPU: AMD Ryzen Threadripper 3990X, 64 cores and 128 threads.
 - RAM: 128 GB DDR4. GPU: NVIDIA RTX 3090, 24 GB VRAM.
 - Measure speed; do not assume 64 or 128 threads is best.
 - Use FP16 or BF16 when the tool supports it. Do not suggest FP8 settings.
-- A 32B Q4 model may fit for inference (running a model), not for every model, chat length, or training job. Larger models may need slower RAM offload.
+- A 32B Q4 model may fit for inference; larger models may need slower RAM offload.
 - Before big work, check free RAM and disk space; use `nvidia-smi` for VRAM. Leave room for Windows and other apps. Start with a small trial; avoid two big GPU jobs together. Keep local AI servers bound to `127.0.0.1`. Save long run outputs to `D:\AI\logs`. Warn before long jobs if Windows sleep could stop them.
 - The CUDA number in `nvidia-smi` is driver support, not proof of an installed toolkit.
 - Official vLLM needs Linux, such as WSL. Prefer native Windows tools; explain and get approval before adding WSL.
@@ -105,26 +104,25 @@ metadata:
 - Before big jobs, check folders exist, are writable, and have room.
 - Set `TEMP`, `TMP`, and `TMPDIR` to `D:\AI\temp` in the session starting the job.
 - Keep Docker and WSL data on D: if used.
-- Read [Windows AI setup](references/windows-ai-setup.md) for setup commands. Permanent changes need rule 8 approval.
+- Read [Windows AI setup](references/windows-ai-setup.md) for setup commands.
 
 ## 16. Windows 11 and PowerShell
 - Commands given to the user: PowerShell (working in 5.1 and 7). Internal tool runs: use the tool's native shell.
 - In PowerShell commands: put commands on separate lines, quote file paths, and do not use `&&`, `||`, or Bash syntax.
 - Use `$env:NAME` for environment settings.
 - Stop after failures. Use `-ErrorAction Stop` for cmdlets and check `$LASTEXITCODE` after native programs before dependent steps.
-- If long paths fail, explain. Do not change Windows settings without approval.
+- If long paths fail, explain.
 
 ## 17. Python and AI Tools
 - Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
 - Always use `uv`. Point commands to the project environment: `uv pip install --python "D:\AI\envs\<project>\Scripts\python.exe" ...` (or set `$env:UV_PROJECT_ENVIRONMENT = "D:\AI\envs\<project>"` for `uv run`).
 - Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
 - Call the environment's `python.exe` directly to avoid activation issues.
-- Install PyTorch with CUDA support via `uv pip` using the official PyTorch wheel index.
-- For PyTorch GPU jobs, verify `torch.cuda.is_available()` is `True` using that environment's Python.
+- Install CUDA PyTorch with `uv pip` from the official PyTorch wheel index; check that `torch.cuda.is_available()` is `True` in that environment.
 - Save package versions with `uv pip freeze` so the setup can be rebuilt.
 
 ## 18. Git
-- Check the branch and existing changes first. Preserve other tools' work.
+- Check the branch and existing changes first.
 - Use Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
 - Never force-push. Push to `main` only with clear approval; an explicit request to push this change counts.
 - Keep existing line endings. Never commit passwords or API keys.
