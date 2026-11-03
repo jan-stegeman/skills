@@ -2,7 +2,7 @@
 name: user-preferences
 description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-10-30.1"
+  version: "2026-11-03.1"
 ---
 
 # User Preferences
@@ -27,9 +27,11 @@ metadata:
 - If you cannot run them, give complete commands in one code block. Name the shell and working folder.
 - Never claim a command ran when it did not.
 
-## 4. Long Tasks: Warn First
-- Before work likely to take over 30 seconds, say what will run and give a rough time.
-- Give progress updates during long work. Do not invent exact times.
+## 4. Long Tasks: Warn First, Save Often
+- Before work likely to take over 30 seconds, say what will run and give a rough time. Give progress updates; do not invent exact times.
+- The PC can restart without warning. Work in steps: one change you can test alone, at most about 20 minutes.
+- Keep a progress file (for example `PROGRESS.md`): done and next. After each step, update it, save to disk, and post `💾 Save point: <step> — next: <what>`.
+- After an unexpected restart, read its top first. Long jobs log results line by line.
 
 ## 5. Long Chats: Handover Summary
 - When useful, suggest a new chat after long work.
@@ -72,7 +74,7 @@ metadata:
 
 ## 12. PC Only
 - Do not add phone or touch support unless requested.
-- Skip mobile-specific layouts and touch rules. Keep desktop windows, zoom, and keyboard use working.
+- Keep desktop windows, zoom, and keyboard use working.
 
 ## 13. When You Are Not Sure
 - Check available files and official docs first.
@@ -83,11 +85,11 @@ metadata:
 - Workstation: ASUS ROG Zenith II Extreme Alpha.
 - CPU: AMD Ryzen Threadripper 3990X, 64 cores and 128 threads.
 - RAM: 128 GB DDR4. GPU: NVIDIA RTX 3090, 24 GB VRAM.
-- Windows 11 lets programs span both processor groups by default. Some programs still have limits. Measure speed; do not assume 64 or 128 threads is best.
+- Measure speed; do not assume 64 or 128 threads is best.
 - Use FP16 or BF16 when the tool supports it. Do not suggest FP8 settings.
-- A 32B Q4 model may fit for inference: running a model to get answers. This is no promise for every model, chat length, or training job. Larger models may need slower RAM offload.
+- A 32B Q4 model may fit for inference (running a model), not for every model, chat length, or training job. Larger models may need slower RAM offload.
 - Before big work, check free RAM and disk space; use `nvidia-smi` for VRAM. Leave room for Windows and other apps. Start with a small trial; avoid two big GPU jobs together. Keep local AI servers bound to `127.0.0.1`. Save long run outputs to `D:\AI\logs`. Warn before long jobs if Windows sleep could stop them.
-- Check driver and tool needs. The CUDA number in `nvidia-smi` is driver support, not proof of an installed toolkit.
+- The CUDA number in `nvidia-smi` is driver support, not proof of an installed toolkit.
 - Official vLLM needs Linux, such as WSL. Prefer native Windows tools; explain and get approval before adding WSL.
 
 ## 15. Storage Rule
@@ -100,7 +102,7 @@ metadata:
   - `UV_CACHE_DIR`: `D:\AI\cache\uv`; `UV_PYTHON_INSTALL_DIR`: `D:\AI\uv\python`
   - Models: `D:\AI\models`; datasets: `D:\AI\datasets`
   - Environments: `D:\AI\envs\<project-name>`; temp: `D:\AI\temp`
-- Before big jobs, check folders exist, are writable, and have room for downloads and results.
+- Before big jobs, check folders exist, are writable, and have room.
 - Set `TEMP`, `TMP`, and `TMPDIR` to `D:\AI\temp` in the session starting the job.
 - Keep Docker and WSL data on D: if used.
 - Read [Windows AI setup](references/windows-ai-setup.md) for setup commands. Permanent changes need rule 8 approval.
@@ -108,7 +110,7 @@ metadata:
 ## 16. Windows 11 and PowerShell
 - Commands given to the user: PowerShell (working in 5.1 and 7). Internal tool runs: use the tool's native shell.
 - In PowerShell commands: put commands on separate lines, quote file paths, and do not use `&&`, `||`, or Bash syntax.
-- Prefer clear PowerShell commands. Use `$env:NAME` for environment settings.
+- Use `$env:NAME` for environment settings.
 - Stop after failures. Use `-ErrorAction Stop` for cmdlets and check `$LASTEXITCODE` after native programs before dependent steps.
 - If long paths fail, explain. Do not change Windows settings without approval.
 
@@ -116,7 +118,7 @@ metadata:
 - Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
 - Always use `uv`. Point commands to the project environment: `uv pip install --python "D:\AI\envs\<project>\Scripts\python.exe" ...` (or set `$env:UV_PROJECT_ENVIRONMENT = "D:\AI\envs\<project>"` for `uv run`).
 - Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
-- Use an available Python launcher and call the environment's `python.exe` directly to avoid activation issues.
+- Call the environment's `python.exe` directly to avoid activation issues.
 - Install PyTorch with CUDA support via `uv pip` using the official PyTorch wheel index.
 - For PyTorch GPU jobs, verify `torch.cuda.is_available()` is `True` using that environment's Python.
 - Save package versions with `uv pip freeze` so the setup can be rebuilt.
