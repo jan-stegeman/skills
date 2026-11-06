@@ -21,7 +21,7 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 
 | Category | Skills |
 | :--- | :--- |
-| **Office Documents** | [**`docx`**](docx/SKILL.md), [**`xlsx`**](xlsx/SKILL.md), [**`pptx`**](pptx/SKILL.md), [**`pdf`**](pdf/SKILL.md), [**`docs`**](docs/SKILL.md) |
+| **Office Documents** | [**`docx`**](docx/SKILL.md), [**`xlsx`**](xlsx/SKILL.md), [**`pptx`**](pptx/SKILL.md), [**`pdf`**](pdf/SKILL.md) |
 | **Research & Web** | [**`deep-research`**](deep-research/SKILL.md), [**`chrome-browser`**](chrome-browser/SKILL.md), [**`built-in-browser`**](built-in-browser/SKILL.md) |
 | **Agents & Automation** | [**`google-workspace`**](google-workspace/SKILL.md), [**`computer-use`**](computer-use/SKILL.md), [**`artifact-emulator`**](artifact-emulator/SKILL.md), [**`imagegen`**](imagegen/SKILL.md) |
 | **Meta Tools** | [**`skill-creator`**](skill-creator/SKILL.md), [**`skill-installer`**](skill-installer/SKILL.md), [**`review-agent`**](review-agent/SKILL.md), [**`import-memory`**](import-memory/SKILL.md), [**`morning`**](morning/SKILL.md) |
