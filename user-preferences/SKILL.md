@@ -2,7 +2,7 @@
 name: user-preferences
 description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
 metadata:
-  version: "2026-11-03.2"
+  version: "2026-11-06.1"
 ---
 
 # User Preferences
@@ -70,6 +70,7 @@ metadata:
 ## 11. Waiting for Me: Always Ask With a Selection
 - I work in other windows and do not watch the chat text. Whenever you need me to do something, to not do something (such as not moving the mouse for some seconds), or to give a go-ahead, ask with the tool's selection question (in Claude: `AskUserQuestion`). Say what will happen and how long it takes.
 - Prepare everything first. Start only after I pick an answer; a warning in the chat is not enough.
+- The selection window hides earlier text. Put the key facts inside the question, and after my answer repeat the complete answer in your final message.
 - No selection tool? End your turn with one clear question and wait for my reply.
 
 ## 12. PC Only
