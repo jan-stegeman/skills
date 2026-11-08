@@ -28,6 +28,20 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 
 ---
 
+## Third-Party Skills (unchanged copies, checked before install)
+
+Copied as they are, with their own license file in the folder. Checked with NVIDIA SkillSpector 2.12.0 (`--no-llm`, `D:\AI\envs\skillspector`) and read by hand before install. `obsidian-bases` is 1,776 words, above the 1,500-word limit of these rules: a deliberate exception, so that it stays the same as its source and easy to update.
+
+| Skill | Description | Source and check |
+| :--- | :--- | :--- |
+| [**`obsidian-bases`**](obsidian-bases/SKILL.md) | Obsidian Bases (`.base` files): views, filters, formulas, summaries. | [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) `3ccff53`, MIT (Steph Ango). SkillSpector: CAUTION only because its parser could not resolve the function list in `references/FUNCTIONS_REFERENCE.md`; read by hand: a list of Bases formula functions, nothing that runs. |
+| [**`obsidian-markdown`**](obsidian-markdown/SKILL.md) | Obsidian Flavored Markdown: wikilinks, embeds, callouts, properties. | Same source and commit. SkillSpector: SAFE, no findings. |
+| [**`json-canvas`**](json-canvas/SKILL.md) | JSON Canvas (`.canvas` files): nodes, edges, groups. | Same source and commit. SkillSpector: SAFE, no findings. |
+
+Not taken from the same repository: `knap` and `defuddle` (they install global npm tools and fetch web pages) and `obsidian-cli` (runs JavaScript inside Obsidian and copies to the clipboard).
+
+---
+
 ## Workstation Profile
 
 * **Host**: ASUS ROG Zenith II Extreme Alpha
