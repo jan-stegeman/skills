@@ -41,7 +41,14 @@ Whenever any AI agent creates, updates, or deprecates a skill:
    git status
    ```
 
-3. **Commit, Then Push Only With Approval**:
+3. **Validate Against Anthropic's Rules Before Every Commit**:
+   Run Anthropic's own validator (from the `skill-creator` skill) on every skill folder you created or changed. It must print `Skill is valid!`; fix any error first and never commit a skill that fails. Also check by hand that the `name` field equals the folder name (the Agent Skills spec requires it; the validator does not check it). `-X utf8` matters: the validator reads files without an encoding, and Windows would read UTF-8 wrongly.
+   ```powershell
+   & "D:\AI\envs\skillspector\Scripts\python.exe" -I -X utf8 "$HOME\.agents\skills\skill-creator\scripts\quick_validate.py" "$HOME\.agents\skills\<skill-name>"
+   ```
+   Without that environment: `uv run --with pyyaml python -X utf8 "<same script>" "<same folder>"`.
+
+4. **Commit, Then Push Only With Approval**:
    Stage only the skill folders you changed (and `README.md` when it changed), never `git add -A`: another file in the folder, or a credential, must not go along. Show what is staged, commit with Conventional Commits, and push to `main` only after the user's clear approval (rule 18 of `user-preferences`):
    ```powershell
    Set-Location "$HOME\.agents\skills"
@@ -51,7 +58,7 @@ Whenever any AI agent creates, updates, or deprecates a skill:
    git push origin main   # only after the user approved this push
    ```
 
-4. **Size Check and Bloat Warning**:
+5. **Size Check and Bloat Warning**:
    - Keep every SKILL.md file under 1,500 words (or under 20 bullet points).
    - If adding a rule causes a skill to exceed 20 points or 1,500 words, the model MUST warn the user before saving:
      *"Warning: This skill file is getting too long (more than 20 points). It is safer to split these rules into a new separate skill folder (e.g. database-rules, frontend-rules) or clean up older rules. Would you like me to split it or trim it?"*
