@@ -1,8 +1,8 @@
 ---
 name: user-preferences
-description: Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git.
+description: "Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git."
 metadata:
-  version: "2026-11-06.1"
+  version: "2026-11-08.1"
 ---
 
 # User Preferences
