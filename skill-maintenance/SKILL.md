@@ -41,13 +41,14 @@ Whenever any AI agent creates, updates, or deprecates a skill:
    git status
    ```
 
-3. **Commit & Push Directly to GitHub**:
-   Adhere to Conventional Commits:
+3. **Commit, Then Push Only With Approval**:
+   Stage only the skill folders you changed (and `README.md` when it changed), never `git add -A`: another file in the folder, or a credential, must not go along. Show what is staged, commit with Conventional Commits, and push to `main` only after the user's clear approval (rule 18 of `user-preferences`):
    ```powershell
    Set-Location "$HOME\.agents\skills"
-   git add -A
+   git add -- <skill-name>
+   git diff --staged --stat
    git commit -m "feat(skills): add <skill-name> skill"
-   git push origin main
+   git push origin main   # only after the user approved this push
    ```
 
 4. **Size Check and Bloat Warning**:
