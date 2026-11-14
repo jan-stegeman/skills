@@ -113,8 +113,8 @@ metadata:
 ## 18. Git
 - Check the branch and existing changes first.
 - Use Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
-- Every commit, in every repo, names the model that makes it: subject `Implemented by <model>: <normal text>`, for example `Implemented by Claude Opus 5.5: fix(web): ...`. Release commits (`release X.Y.Z`) keep their subject.
-- A Claude model is also the author, so GitHub lists Claude as Contributor (only visible in public repos): `git commit --author="Claude Opus 5.5 <noreply@anthropic.com>" -F msg.txt`. The committer stays the user. Gemini, GPT and Codex keep the user as author.
+- Every commit names the model and its effort level, e.g. subject `Implemented by Claude Opus 5.5 High: fix(web): ...`. Unknown level: ask me once. Release commits (`release X.Y.Z`) keep their subject.
+- A Claude model is also the author, same name, so GitHub lists Claude as Contributor (public repos only): `git commit --author="Claude Opus 5.5 High <noreply@anthropic.com>" -F msg.txt`. The committer stays the user. Gemini, GPT and Codex keep the user as author.
 - Never force-push. Push to `main` only with clear approval; an explicit request to push this change counts.
 - Keep existing line endings. Never commit passwords or API keys.
 
