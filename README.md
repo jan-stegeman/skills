@@ -14,6 +14,7 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 | [**`t3-orchestration-patterns`**](t3-orchestration-patterns/SKILL.md) | Multi-agent execution guidelines in T3 Code (subagents vs. delegates vs. background tasks). |
 | [**`skill-maintenance`**](skill-maintenance/SKILL.md) | Automated lifecycle for creating, updating, and pushing skills directly to this GitHub repository. |
 | [**`desktop-ui-check`**](desktop-ui-check/SKILL.md) | Read-only review of a Windows desktop program: wording, measured colour contrast, keyboard use, screen states, and a check per release. |
+| [**`html-app-house-style`**](html-app-house-style/SKILL.md) | One house style for the standalone single-file HTML apps (TensorTailor, GlyphGarage, …): shared colours and fonts, top bar, light/dark, version `vYYYY.MM.DD` / `dev build`, one accent colour per app, project setup, and a check script for drift and contrast. |
 
 ---
 

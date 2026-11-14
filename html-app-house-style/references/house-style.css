@@ -1,0 +1,121 @@
+/* House style for the user's standalone HTML apps: the shared tokens.
+   Source: TensorTailor (D:\AI\tools\llmfit-studio\web\app.html, lines 8-144, 2026-11-15).
+   Copy these blocks into the app's own <style> unchanged, then add the app's accent tokens (references/apps.md)
+   and app-only tokens in the same three blocks. Light below; dark twice with the same values: when Windows is dark
+   (unless the user chose light), and when the user chose dark.
+   scripts/check_house_style.py compares an app with this file. Change this file first, then rebuild every app. */
+:root {
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --display: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --mono: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --panel-2: #f6f7fa;
+  --line: rgba(16, 24, 40, .09);
+  --line-2: rgba(16, 24, 40, .15);
+  --raised: #f7f8fa;
+  --sunken: #f1f3f6;
+  --hover: #f4f6f9;
+  --text: #0e1116;
+  --text-2: #3a4350;
+  --muted: #586272;
+  --faint: #636d7c;
+  --perfect: #0f7a3c;
+  --perfect-soft: rgba(16, 128, 63, .1);
+  --good: #09659a;
+  --good-soft: rgba(11, 111, 168, .1);
+  --marginal: #a65306;
+  --marginal-soft: rgba(166, 83, 6, .1);
+  --tight: #c0261c;
+  --tight-soft: rgba(192, 38, 28, .09);
+  --elev: 0 0 0 1px rgba(16, 24, 40, .08), 0 1px 2px rgba(16, 24, 40, .04);
+  --pop: 0 0 0 1px rgba(16, 24, 40, .12), 0 16px 40px rgba(16, 24, 40, .14);
+  --shadow: var(--elev);
+  --glass: rgba(255, 255, 255, .8);
+  --radius: 14px;
+  --side: #fafbfc;
+  --data: #8a95a6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  color-scheme: dark;
+  --bg: #090b0f;
+  --panel: #11151c;
+  --panel-2: #161b23;
+  --line: rgba(255, 255, 255, .07);
+  --line-2: rgba(255, 255, 255, .11);
+  --raised: #161b23;
+  --sunken: #0d1016;
+  --hover: #161b24;
+  --text: #eceff4;
+  --text-2: #b4bdc9;
+  --muted: #95a0b0;
+  --faint: #808b9c;
+  --perfect: #3ddc84;
+  --perfect-soft: rgba(61, 220, 132, .12);
+  --good: #48c4f4;
+  --good-soft: rgba(72, 196, 244, .12);
+  --marginal: #f5b93a;
+  --marginal-soft: rgba(245, 185, 58, .12);
+  --tight: #f47174;
+  --tight-soft: rgba(244, 113, 116, .12);
+  --elev: 0 0 0 1px rgba(255, 255, 255, .065), inset 0 1px 0 rgba(255, 255, 255, .03);
+  --pop: 0 0 0 1px rgba(255, 255, 255, .1), 0 16px 40px rgba(0, 0, 0, .55);
+  --shadow: var(--elev);
+  --glass: rgba(12, 15, 20, .74);
+  --side: #0c0f14;
+  --data: #6b7789;
+}
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #090b0f;
+  --panel: #11151c;
+  --panel-2: #161b23;
+  --line: rgba(255, 255, 255, .07);
+  --line-2: rgba(255, 255, 255, .11);
+  --raised: #161b23;
+  --sunken: #0d1016;
+  --hover: #161b24;
+  --text: #eceff4;
+  --text-2: #b4bdc9;
+  --muted: #95a0b0;
+  --faint: #808b9c;
+  --perfect: #3ddc84;
+  --perfect-soft: rgba(61, 220, 132, .12);
+  --good: #48c4f4;
+  --good-soft: rgba(72, 196, 244, .12);
+  --marginal: #f5b93a;
+  --marginal-soft: rgba(245, 185, 58, .12);
+  --tight: #f47174;
+  --tight-soft: rgba(244, 113, 116, .12);
+  --elev: 0 0 0 1px rgba(255, 255, 255, .065), inset 0 1px 0 rgba(255, 255, 255, .03);
+  --pop: 0 0 0 1px rgba(255, 255, 255, .1), 0 16px 40px rgba(0, 0, 0, .55);
+  --shadow: var(--elev);
+  --glass: rgba(12, 15, 20, .74);
+  --side: #0c0f14;
+  --data: #6b7789;
+}
+
+/* Base rules every app uses (TensorTailor lines 145-158). */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.45 var(--font); }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code { font: 12px var(--mono); }
+a { color: var(--accent); }
+kbd { font: 11px var(--mono); padding: 1px 6px; border-bottom-width: 2px; border-radius: 5px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+h1, h2, .brand-name, .dlg-head h2 { font-family: var(--display); letter-spacing: -.01em; }
+
+/* Brand (top left): logo square + name + version line (TensorTailor lines 161, 600-603). The logo colours come
+   from the app's --logo-1/2/3 and --logo-glow tokens (references/apps.md). */
+.brand { display: flex; gap: 10px; align-items: center; }
+.logo { width: 30px; height: 30px; border-radius: 9px; flex: none; display: grid; place-items: center; background: radial-gradient(120% 120% at 20% 10%, var(--logo-1) 0%, var(--logo-2) 45%, var(--logo-3) 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 6px 18px var(--logo-glow); }
+.logo svg { width: 19px; height: 19px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.brand-name { font-weight: 700; font-size: 15px; letter-spacing: -.015em; }
+.brand-sub { font-size: 11px; color: var(--faint); }
