@@ -24,7 +24,9 @@ BLOCKS = {
     "dark": re.compile(r""":root:not\(\[data-theme=["']light["']\]\)\s*\{([^{}]*)\}"""),
     "chosen": re.compile(r""":root\[data-theme=["']dark["']\]\s*\{([^{}]*)\}"""),
 }
-DECL = re.compile(r"(--[\w-]+|color-scheme)\s*:\s*([^;]+);")
+DARK_MEDIA = re.compile(r"@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)\s*\{")
+DECL = re.compile(r"(--[\w-]+|color-scheme)\s*:\s*([^;]+)(?:;|$)")
+NAMED = {"white": "#ffffff", "black": "#000000"}
 
 
 def css_text(path):
@@ -34,20 +36,41 @@ def css_text(path):
     return re.sub(r"/\*.*?\*/", "", text, flags=re.S)
 
 
+def short_number(m):
+    t = ("%.6f" % float(m.group())).rstrip("0").rstrip(".")
+    return t[1:] if t.startswith("0.") else t  # 0.5 = .5 = .50
+
+
 def norm(value):
     v = re.sub(r"\s+", " ", value.strip().lower())
-    v = re.sub(r"\s*([,()])\s*", r"\1", v)
+    v = re.sub(r"\s*([,()/])\s*", r"\1", v)
     v = re.sub(r"#([0-9a-f])([0-9a-f])([0-9a-f])\b", r"#\1\1\2\2\3\3", v)  # #fff = #ffffff
-    return re.sub(r"(?<![\d.])0\.(\d)", r".\1", v)  # 0.5 = .5
+    v = re.sub(r"(?<![\w#])\d*\.\d+", short_number, v)
+    return NAMED.get(v, v)
+
+
+def dark_media_bodies(text):
+    """The text inside every @media (prefers-color-scheme: dark) { ... } (braces counted)."""
+    bodies = []
+    for m in DARK_MEDIA.finditer(text):
+        depth, i = 1, m.end()
+        while i < len(text) and depth:
+            depth += {"{": 1, "}": -1}.get(text[i], 0)
+            i += 1
+        bodies.append(text[m.end():i - 1])
+    return bodies
 
 
 def blocks(text):
     out = {}
     for name, rx in BLOCKS.items():
+        # The "follows Windows" dark block only counts inside its @media; outside it, dark would always be on.
+        sources = dark_media_bodies(text) if name == "dark" else [text]
         tokens = {}
-        for body in rx.findall(text):
-            for key, value in DECL.findall(body):
-                tokens[key] = norm(value)
+        for source in sources:
+            for body in rx.findall(source):
+                for key, value in DECL.findall(body.strip()):
+                    tokens[key] = norm(value)
         out[name] = tokens
     return out
 
@@ -60,10 +83,16 @@ def parse_colour(value, under=(1.0, 1.0, 1.0)):
         if len(h) == 3:
             h = "".join(c * 2 for c in h)
         return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
-    m = re.fullmatch(r"rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)", value)
-    if m:
-        rgb = [float(m.group(i)) / 255 for i in (1, 2, 3)]
-        a = float(m.group(4)) if m.group(4) else 1.0
+    m = re.fullmatch(r"rgba?\((.*)\)", value)
+    if m:  # rgb(1,2,3) rgba(1,2,3,.5) rgb(1 2 3/.5) rgb(1 2 3/50%)
+        parts = [p for p in re.split(r"[\s,/]+", m.group(1)) if p]
+        try:
+            rgb = [float(p) / 255 for p in parts[:3]]
+            a = 1.0 if len(parts) < 4 else (float(parts[3][:-1]) / 100 if parts[3].endswith("%") else float(parts[3]))
+        except ValueError:
+            return None
+        if len(parts) not in (3, 4):
+            return None
         return tuple(a * c + (1 - a) * u for c, u in zip(rgb, under))
     return None
 
@@ -117,7 +146,7 @@ def main(argv):
         return 2
     try:
         ref = blocks(css_text(REFERENCE))
-    except OSError as e:
+    except (OSError, UnicodeDecodeError) as e:
         print(f"cannot read the house style {REFERENCE}: {e}")
         return 2
     worst = 0
@@ -125,7 +154,7 @@ def main(argv):
         path = Path(arg)
         try:
             shared, faults, notes = check(path, ref)
-        except OSError as e:
+        except (OSError, UnicodeDecodeError) as e:
             print(f"{path}: cannot read it: {e}")
             worst = 2
             continue

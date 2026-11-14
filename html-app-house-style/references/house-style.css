@@ -98,7 +98,7 @@
   --data: #6b7789;
 }
 
-/* Base rules every app uses (TensorTailor lines 145-158). */
+/* Base rules every app uses (TensorTailor lines 145-158; kbd look from line 567; headings from line 532). */
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 body { background: var(--bg); color: var(--text); font: 14px/1.45 var(--font); }
@@ -109,6 +109,7 @@ button:disabled { cursor: not-allowed; opacity: .55; }
 code { font: 12px var(--mono); }
 a { color: var(--accent); }
 kbd { font: 11px var(--mono); padding: 1px 6px; border-bottom-width: 2px; border-radius: 5px; color: var(--muted); }
+kbd { border: 0; box-shadow: inset 0 0 0 1px var(--line-2), 0 1px 0 var(--line-2); background: var(--panel); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 h1, h2, .brand-name, .dlg-head h2 { font-family: var(--display); letter-spacing: -.01em; }
 

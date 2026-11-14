@@ -34,9 +34,11 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 - Left, the brand: logo square (30px, radius 9px, radial gradient of the app's 3 logo colours, a white line icon,
   stroke 2.2), the name (`--display`, 700, 15px), and under it the version line (`.brand-sub`, 11px, `--faint`).
 - Middle: search with a `/` key hint (`<kbd>/</kbd>`); `/` focuses it, `Esc` clears or leaves it.
-- Right: Help (`?` opens it, `Esc` closes), About, and the theme button ◐.
-- Theme: follows Windows (`prefers-color-scheme`) until the user presses ◐; the choice goes in `localStorage` under
-  `<prefix>-theme` (see apps.md) as `data-theme` on `<html>`. Wrap storage in try/catch (`safeGet`/`safeSet`).
+- Right, icon buttons: Help (`?` opens it, `Esc` closes) and a Tools menu (☰) with "Light or dark" (key `T`, a
+  half-filled circle icon) and "About and licenses"; an app may add its own items to that menu.
+- Theme: follows Windows (`prefers-color-scheme`) until the user chooses "Light or dark"; the choice goes in
+  `localStorage` under `<prefix>-theme` (see apps.md) as `data-theme` on `<html>`. Wrap storage in try/catch
+  (`safeGet`/`safeSet`).
 
 ## 5. Accent Colour per App
 - Each app has its own accent (`--accent`, `--accent-2`, `--accent-soft`, `--accent-text`, `--accent-ring`) in all three
@@ -85,4 +87,5 @@ Run it on the source and the built file after every change to the look; it must 
 & "D:\AI\envs\<project>\Scripts\python.exe" -I -X utf8 "$HOME\.agents\skills\html-app-house-style\scripts\check_house_style.py" "D:\AI\tools\<folder>\web\<page>.html"
 ```
 It compares every shared token with `house-style.css`, checks the accent tokens in all three blocks, and checks
-contrast (4.5:1). Add it to the app's own test list.
+contrast (4.5:1). Add it to the app's own test list. After a change to the script itself, run
+`scripts\test_check_house_style.py` (it must print "all ... tests passed").
