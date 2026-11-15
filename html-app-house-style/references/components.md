@@ -122,6 +122,16 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - A running clock changes just after each whole second of the PC (`setTimeout` to the next second, not a plain
   1000 ms interval) and only while its page is shown. Times come from `Intl` only, never a typed offset rule.
 
+## Date rows (dates, weeks, Unix time)
+- A row of labelled boxes is a wrapping flex row (`align-items: end`, gap 10px) with fixed label widths (date 190px,
+  time 150px, list 150px, number 120px, wide `min(360px, 100%)`), so a small window moves boxes to the next line
+  instead of squeezing them. Boxes 40px high, 15px; a **Today** / **Now** button at the end of the row.
+- Dates are written `YYYY-MM-DD`; a card with seconds leaves out the weekday so the date stays on one line, and keeps
+  milliseconds (`.123`) in its text and its Copy. A table row of the chosen item (the week of the chosen date) gets
+  `--accent-soft`, its first cell in `--accent` 600.
+- Calendar rules come from the browser's own `Date` in UTC (leap years, days of a month), never a typed table; an
+  input the date box lets through (year 10000) is named, never a page error.
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
