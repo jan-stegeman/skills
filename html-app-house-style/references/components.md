@@ -66,6 +66,15 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
   below them in `--mono` 12px with letter-spacing .12em; tile grid `minmax(104px, 1fr)`. The marks are
   `aria-hidden`; the tile's label says the code as text.
 
+## Sound controls
+- A row (`.snd`, flex, gap `10px 16px`): a filled **Play** button (`--accent`, `--accent-text`, 34px high, radius 9px),
+  plain buttons (`--panel-2` + `--elev`: Stop, Save as …), range sliders with their label and an `<output>` that
+  shows the value (`accent-color: var(--accent)`), and the item that plays now in `--accent` (aria-hidden).
+- Never a surprise sound: sound starts only on a click; a "Sound on click" option is a toggle button
+  (`aria-pressed`, off at the start). Play moves focus to Stop; at the end focus goes back to Play.
+- Make sound in the page (Web Audio, 5 ms fade in and out per tone); a saved sound file is built in memory and
+  downloaded with a `blob:` link. Test the real download (cdp_test `"download"` step).
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
