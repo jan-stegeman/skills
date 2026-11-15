@@ -1,6 +1,6 @@
 ---
 name: html-app-house-style
-description: House style and project setup for the user's standalone single-file HTML apps (TensorTailor, GlyphGarage and every new one), so they form one suite. Shared colours, fonts, top bar, logo, light/dark, version "vYYYY.MM.DD" or "dev build" plus commit, one accent colour per app, folders, repo, docs and checks. Use when you start, restyle, build or review such an app, or choose the name or colour of a new one.
+description: House style and project setup for the user's standalone single-file HTML apps (TensorTailor, GlyphGarage and every new one), so they form one suite. Shared colours, fonts, top bar, logo, light/dark, version "vYYYY.MM.DD" or "dev build" plus commit, one accent colour per app, folders, repo, docs and checks, and a repo that is ready to go public from day one (public-ready check, going-public checklist). Use when you start, restyle, build or review such an app, choose the name or colour of a new one, or prepare its repo to go public.
 ---
 
 # HTML App House Style
@@ -68,8 +68,9 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 ## 8. Project Setup
 - Folder `D:\AI\tools\<folder>`; `web\` source, `dist\` output (ignored), `tools\` scripts and tests; `PROGRESS.md`,
   `research\`, `design\` stay on the PC only (in `.gitignore`).
-- Files like TensorTailor: README.md, LICENSE (MIT), SECURITY.md, CONTRIBUTING.md, ACCESSIBILITY.md,
-  THIRD-PARTY-NOTICES.md, `.github` PR template, `.gitattributes`.
+- Files like TensorTailor: README.md (with a "No warranty" line), LICENSE (MIT), SECURITY.md, CONTRIBUTING.md,
+  ACCESSIBILITY.md, THIRD-PARTY-NOTICES.md, `.github` PR template and issue forms (`ISSUE_TEMPLATE\*.yml`,
+  `config.yml` with blank issues off), `.gitattributes`. Repo-local git e-mail: the GitHub no-reply address.
 - Build script: `web\build.mjs` (Node) like TensorTailor; data generators may be Python (one environment per
   project under `D:\AI\envs`).
 - GitHub repo `jan-stegeman/<name>`, private first. Before it goes public: full trademark check of the name (WIPO
@@ -91,3 +92,18 @@ Run it on the source and the built file after every change to the look; it must 
 It compares every shared token with `house-style.css`, checks the accent tokens in all three blocks, and checks
 contrast (4.5:1). Add it to the app's own test list. After a change to the script itself, run
 `scripts\test_check_house_style.py` (it must print "all ... tests passed").
+
+## 11. Ready to Go Public From Day One
+Every repo starts private but stays ready to go public, so going public needs no clean-up round. Add this check to
+the app's test list from the first step; it must print `OK public ready`:
+```powershell
+& "D:\AI\envs\<project>\Scripts\python.exe" -I -X utf8 "$HOME\.agents\skills\html-app-house-style\scripts\check_public_ready.py" "D:\AI\tools\<folder>" --built "dist\<name>.html"
+```
+- It fails on: a commit e-mail that is not no-reply; private text, keys, tokens, user folder paths, home-network
+  addresses or e-mail addresses in the files, their history, commit messages or the built page; work notes in git;
+  a missing public file; a workflow action not pinned by SHA, without `permissions:` or `persist-credentials: false`.
+- Private words: `~/.config/public-ready/private.txt`, on the PC only. Accept a third-party hit (an address a
+  license requires) only with a narrow `--allow` regex and a comment in the test script.
+- Never print a private value in chat or logs in full. Workflows: token with least rights, Dependabot for actions.
+- Going public: follow `references/going-public.md`; every step only after the user's OK.
+- After a change to the script, run `scripts\test_check_public_ready.py` ("all ... tests passed").
