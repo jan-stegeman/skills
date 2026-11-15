@@ -61,6 +61,18 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Typing in one box fills the other. The page's filter and group buttons are hidden in this view (`data-views`).
 - Never drop input silently: the note names every character or code that has no translation.
 
+## Number boxes (several bases or units that fill each other)
+- One row per box: `grid-template-columns: 150px minmax(0, 1fr) 70px` (name with a `--muted` 11.5px `--mono` sub
+  line such as "base 16 · 0x", the box, Copy). Box: textarea `rows="1"`, `--mono` 15px, min-height 46px, no resize;
+  it grows with its text (height = scrollHeight, also from a `ResizeObserver` via `requestAnimationFrame`), and
+  Enter adds no line. One `aria-live` note under all boxes; a box with wrong input gets a `--tight` border and the
+  note names every wrong character.
+- A code in a table that copies itself: a `<button class="kb">` that looks like a code tag (`--sunken`, 1px `--line`,
+  radius 6px, 12.5px `--mono`) and lights up like a tile on hover; it copies the text without spaces. Use it when a
+  row has several codes, instead of one Copy per row.
+- Small tables inside a panel use their own class (not `.tbl`): the page filter works on every `.tbl tbody tr`.
+- Never name a class after a page part (`.wrap`, `.top`, `.side`, `.content`, `.card`): it takes that part's layout.
+
 ## Drawn codes (Morse)
 - Dots and dashes as round marks in `--accent`: dot 6×6px, dash 16×6px, radius 3px, gap 3px; the text form (`.-`)
   below them in `--mono` 12px with letter-spacing .12em; tile grid `minmax(104px, 1fr)`. The marks are
