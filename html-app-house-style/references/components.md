@@ -117,8 +117,9 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 
 ## Clocks (time zones)
 - A card per city (grid `minmax(210px, 1fr)`): name 13px 600 with a × remove button (`aria-label` "Remove …"), the
-  time `--mono` 600 26px in `--accent`, then date and offset lines 12px `--muted`; the user's own zone first, marked
-  like a current card (`--accent-soft` + `--accent-ring`) and not removable.
+  time `--mono` 600 26px in `--accent`, then date and offset lines 12px `--muted`; the user's own zone is marked like a
+  current card (`--accent-soft` + `--accent-ring`) and not removable. Cards go in time order by their UTC offset now:
+  behind the user on the left, their own zone, ahead on the right (same offset: order added); redraw when it changes.
 - A running clock changes just after each whole second of the PC (`setTimeout` to the next second, not a plain
   1000 ms interval) and only while its page is shown. Times come from `Intl` only, never a typed offset rule.
 
