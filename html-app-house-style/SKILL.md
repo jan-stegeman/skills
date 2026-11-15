@@ -31,6 +31,8 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 - `[hidden] { display: none !important; }` is a base rule: without it, an element with its own `display` (flex,
   grid) stays visible when hidden. Tests check real visibility (`el.checkVisibility()`), not the attribute.
 - PC only: full keyboard use; no phone layout unless the user asks.
+- Tool pages use the shared components in `references/components.md`: card up to 1480px, equal step boxes, real
+  view tabs, tiles plus a table view, sticky table headers, Copy on hover/focus, chart panels, menu glyph tiles.
 
 ## 4. Top Bar
 - Left, the brand: logo square (30px, radius 9px, radial gradient of the app's 3 logo colours, a white line icon,
