@@ -26,6 +26,9 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - A tile is a `<button>`: `aria-label` = character, name and every code; `title` = the name. Groups get an `h2`
   with a live count (the number of tiles that match the filter); a group without matches is hidden.
 - Always offer a table view of the same data (names, for search and screen readers); one filter drives both.
+- Word tiles (word lists, for example BIP39): grid `minmax(118px, 1fr)`, tile 62px high; the word 15px `--muted`
+  with the part that matters (the first 4 letters) 650 `--text`; the number below like the main code. Their filter
+  matches from the start of a word, and a typed number is that exact item number (`data-match="start"`).
 
 ## Tables
 - Header: `position: sticky; top: calc(-1 * var(--content-pad-top))`, `--panel` background, inset bottom line,
