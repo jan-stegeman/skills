@@ -70,7 +70,7 @@ For Python, set temp paths before starting Python; it can remember its temp choi
 
 ## 3. Save cache paths only with approval
 
-This is a permanent change to user environment settings and falls under rule 8.
+This is a permanent change to user environment settings and falls under rule 8 of `user-preferences`.
 Get approval for saving these paths before running the block.
 Use the values from section 2. Leave Windows-wide temp settings alone.
 

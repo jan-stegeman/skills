@@ -5,19 +5,12 @@ description: Execution rules, sizing heuristics, and acceleration strategies for
 
 # Local AI Model Runner & Acceleration Profile
 
-## Hardware Execution Profile
-- **Host**: ASUS ROG Zenith II Extreme Alpha
-- **CPU**: AMD Ryzen Threadripper 3990X (64 Cores / 128 Threads)
-- **RAM**: 128 GB Quad-Channel DDR4
-- **GPU**: NVIDIA GeForce RTX 3090 (24 GB GDDR6X, Compute Capability 8.6, CUDA 12+)
-- **OS**: Windows 11 Professional (PowerShell native)
-
-## Storage Invariant
-- **Strict Prohibition**: Never download, cache, or unpack models, checkpoints, or datasets onto drive `C:`.
-- **Model Checkpoints & Weights**: `D:\AI\models`
-- **Hugging Face Cache**: `D:\AI\huggingface` (`$env:HF_HOME = "D:\AI\huggingface"`)
-- **Ollama Storage**: `D:\AI\ollama\models` (`$env:OLLAMA_MODELS = "D:\AI\ollama\models"`)
-- **PyTorch / Inductor Cache**: `D:\AI\cache\torch`
+## Hardware and Storage
+- Load the skill `ai-workstation` first: it has the CPU, RAM and GPU, the checks before big jobs, the storage folders
+  under `D:\AI` (models, `HF_HOME`, `OLLAMA_MODELS`, `TORCH_HOME`; never models or datasets on `C:`), and the Python
+  environment rules.
+- Extra details for model work: board ASUS ROG Zenith II Extreme Alpha; RAM is quad-channel; the RTX 3090 has
+  GDDR6X memory and Compute Capability 8.6.
 
 ## Model Sizing & Placement Heuristics
 

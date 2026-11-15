@@ -8,8 +8,9 @@ Central repository of Agent Skills, user preferences, and hardware-accelerated p
 
 | Skill | Description |
 | :--- | :--- |
-| [**`user-preferences`**](user-preferences/SKILL.md) | Communication profile (Plain English & Dutch mirroring), didactic explanations, hardware specifications, 24-hour time, and metric units. |
-| [**`local-model-runner`**](local-model-runner/SKILL.md) | Sizing heuristics and acceleration strategies for local models (Ollama, vLLM, llama.cpp) on the AMD Threadripper 3990X and RTX 3090. |
+| [**`user-preferences`**](user-preferences/SKILL.md) | Communication profile (Plain English & Dutch mirroring), didactic explanations, selection questions, safe code changes, Git, 24-hour time, and metric units. |
+| [**`ai-workstation`**](ai-workstation/SKILL.md) | Hardware, storage folders under `D:\AI`, checks before big jobs, and `uv` environments for AI work on this PC (rules 14, 15 and 17 of `user-preferences` until 2026-11-15). |
+| [**`local-model-runner`**](local-model-runner/SKILL.md) | Sizing heuristics and acceleration strategies for local models (Ollama, vLLM, llama.cpp) on the AMD Threadripper 3990X and RTX 3090; uses `ai-workstation` for hardware and storage. |
 | [**`git-worktree-flow`**](git-worktree-flow/SKILL.md) | Safe, non-blocking parallel workflows using Git worktrees and Conventional Commits. |
 | [**`t3-orchestration-patterns`**](t3-orchestration-patterns/SKILL.md) | Multi-agent execution guidelines in T3 Code (subagents vs. delegates vs. background tasks). |
 | [**`skill-maintenance`**](skill-maintenance/SKILL.md) | Automated lifecycle for creating, updating, and pushing skills directly to this GitHub repository. |

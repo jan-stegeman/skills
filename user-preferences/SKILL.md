@@ -1,8 +1,8 @@
 ---
 name: user-preferences
-description: "Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, hardware, storage, Python, and Git."
+description: "Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, and Git. Hardware, storage and Python rules are in the skill ai-workstation."
 metadata:
-  version: "2026-11-13.1"
+  version: "2026-11-15.1"
 ---
 
 # User Preferences
@@ -74,27 +74,11 @@ metadata:
 - Ask one short question only if missing facts prevent safe progress.
 
 ## 14. Computer and Compute
-- CPU: AMD Ryzen Threadripper 3990X (64 cores, 128 threads; measure, do not assume all threads is best). RAM: 128 GB DDR4. GPU: NVIDIA RTX 3090, 24 GB VRAM.
-- Use FP16 or BF16 when the tool supports it. Do not suggest FP8 settings.
-- A 32B Q4 model may fit for inference; larger models may need slower RAM offload.
-- Before big work, check free RAM, disk space and VRAM (`nvidia-smi`); leave room for Windows. Start with a small trial; no two big GPU jobs together. Bind local AI servers to `127.0.0.1`. Save long run outputs to `D:\AI\logs`. Warn if Windows sleep could stop a long job.
-- The CUDA number in `nvidia-smi` is driver support, not proof of an installed toolkit.
-- Official vLLM needs Linux (WSL). Prefer native Windows tools; get approval before adding WSL.
+- Moved to the skill `ai-workstation` (with rules 15 and 17). Load it before GPU or model work, downloads,
+  big jobs, installing Python packages, or making an environment.
 
 ## 15. Storage Rule
-- C: is for Windows, apps, and their required settings. Put new source projects on D:. Do not move existing projects without approval.
-- Keep AI data under `D:\AI`:
-  - `HF_HOME`: `D:\AI\huggingface`
-  - `OLLAMA_MODELS`: `D:\AI\ollama\models`
-  - `TORCH_HOME`: `D:\AI\cache\torch`
-  - `PIP_CACHE_DIR`: `D:\AI\cache\pip`
-  - `UV_CACHE_DIR`: `D:\AI\cache\uv`; `UV_PYTHON_INSTALL_DIR`: `D:\AI\uv\python`
-  - Models: `D:\AI\models`; datasets: `D:\AI\datasets`
-  - Environments: `D:\AI\envs\<project-name>`; temp: `D:\AI\temp`
-- Before big jobs, check folders exist, are writable, and have room.
-- Set `TEMP`, `TMP`, and `TMPDIR` to `D:\AI\temp` in the session starting the job.
-- Keep Docker and WSL data on D: if used.
-- Read [Windows AI setup](references/windows-ai-setup.md) for setup commands.
+- Moved to `ai-workstation`. In short: C: is for Windows and apps; AI data, models and caches go under `D:\AI`.
 
 ## 16. Windows 11 and PowerShell
 - Commands given to the user: PowerShell (working in 5.1 and 7). Internal tool runs: use the tool's native shell.
@@ -104,11 +88,7 @@ metadata:
 - If long paths fail, explain.
 
 ## 17. Python and AI Tools
-- Use one environment per project under `D:\AI\envs`. Never install AI packages into the main Python.
-- Always use `uv`, pointed at the project environment: `uv pip install --python "D:\AI\envs\<project>\Scripts\python.exe" ...` (or `$env:UV_PROJECT_ENVIRONMENT` for `uv run`). Call that `python.exe` directly, without activation.
-- Use `if __name__ == "__main__":` for multi-worker Python scripts on Windows.
-- Install CUDA PyTorch with `uv pip` from the official PyTorch wheel index; check `torch.cuda.is_available()` there.
-- Save package versions with `uv pip freeze` so the setup can be rebuilt.
+- Moved to `ai-workstation`. In short: one `uv` environment per project under `D:\AI\envs`; never the main Python.
 
 ## 18. Git
 - Check the branch and existing changes first.
@@ -117,6 +97,7 @@ metadata:
 - A Claude model is also the author, same name, so GitHub lists Claude as Contributor (public repos only): `git commit --author="Claude Opus 5.5 High <noreply@anthropic.com>" -F msg.txt`. The committer stays the user. Gemini, GPT and Codex keep the user as author.
 - Never force-push. Push to `main` only with clear approval; an explicit request to push this change counts.
 - Keep existing line endings. Never commit passwords or API keys.
+- New repo: ask me at once about the Umbrel backup (`Dictate-Speak-work\scripts\backup-repos.json`).
 
 ## 19. Units and Format
 - Use a 24-hour clock, Celsius, metric units, and ISO dates (YYYY-MM-DD).
