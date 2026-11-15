@@ -105,9 +105,16 @@ def contrast(fg, bg):
     return (a + 0.05) / (b + 0.05)
 
 
+HIDDEN_RULE = re.compile(r"(^|[\s}])\[hidden\]\s*\{\s*display\s*:\s*none\s*!\s*important")
+
+
 def check(path, ref):
-    app = blocks(css_text(path))
+    text = css_text(path)
+    app = blocks(text)
     faults, notes = [], []
+    if not HIDDEN_RULE.search(text):
+        # A warning, not a fault: apps made before 2026-11-15 (TensorTailor) hide element by element.
+        notes.append("WARNING: no general rule [hidden] { display: none !important; } (house-style.css base rules)")
     shared = 0
     for name, ref_tokens in ref.items():
         for key, value in ref_tokens.items():
@@ -166,7 +173,7 @@ def main(argv):
         else:
             print(f"OK {path}: {shared} shared tokens match the house style")
         for n in notes:
-            print(f"  contrast {n}")
+            print(f"  {n}" if n.startswith("WARNING") else f"  contrast {n}")
     return worst
 
 

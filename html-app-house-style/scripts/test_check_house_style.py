@@ -37,9 +37,22 @@ CASES = [
 ]
 
 
+def run_full(path):
+    r = subprocess.run([sys.executable, "-I", "-X", "utf8", str(CHECK), str(path)],
+                       capture_output=True, text=True, encoding="utf-8")
+    return r.returncode, r.stdout
+
+
 def run(path):
-    return subprocess.run([sys.executable, "-I", "-X", "utf8", str(CHECK), str(path)],
-                          capture_output=True, text=True, encoding="utf-8").returncode
+    return run_full(path)[0]
+
+
+# (name, page, expected exit code, WARNING expected in the output)
+WARNING_CASES = [
+    ("page with the [hidden] rule: no warning", page(), 0, False),
+    ("page without the [hidden] rule: warning, still exit 0",
+     page(css=CSS.replace("[hidden] { display: none !important; }", "")), 0, True),
+]
 
 
 def main():
@@ -52,6 +65,13 @@ def main():
             if got != want:
                 failed += 1
                 print(f"FAIL {name}: exit {got}, expected {want}")
+        for i, (name, html, want, warn) in enumerate(WARNING_CASES):
+            path = Path(tmp) / f"warn{i}.html"
+            path.write_text(html, encoding="utf-8")
+            code, out = run_full(path)
+            if code != want or ("WARNING" in out) != warn:
+                failed += 1
+                print(f"FAIL {name}: exit {code}, warning shown: {'WARNING' in out}")
         bad = Path(tmp) / "not-utf8.html"
         bad.write_bytes(b"<style>\xff\xfe:root{}</style>")
         if run(bad) != 2:
@@ -60,7 +80,7 @@ def main():
         if run(Path(tmp) / "missing.html") != 2:
             failed += 1
             print("FAIL a missing file must give exit 2")
-    total = len(CASES) + 2
+    total = len(CASES) + len(WARNING_CASES) + 2
     print(f"{total - failed} of {total} tests passed" if failed else f"all {total} tests passed")
     return 1 if failed else 0
 

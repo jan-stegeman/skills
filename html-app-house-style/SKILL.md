@@ -28,6 +28,8 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 - Status colours keep one meaning in every app: `--perfect` green = good, `--good` blue = info, `--marginal` amber =
   warning, `--tight` red = fault. Never use them as decoration.
 - Focus ring `2px solid var(--accent)`; respect `prefers-reduced-motion`; contrast at least 4.5:1 (WCAG AA).
+- `[hidden] { display: none !important; }` is a base rule: without it, an element with its own `display` (flex,
+  grid) stays visible when hidden. Tests check real visibility (`el.checkVisibility()`), not the attribute.
 - PC only: full keyboard use; no phone layout unless the user asks.
 
 ## 4. Top Bar

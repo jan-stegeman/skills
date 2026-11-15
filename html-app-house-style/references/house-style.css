@@ -100,6 +100,9 @@
 
 /* Base rules every app uses (TensorTailor lines 145-158; kbd look from line 567; headings from line 532). */
 * { box-sizing: border-box; }
+/* "hidden" must always hide, also on elements with their own display (flex, grid). Without it, a list item with
+   display: flex stays visible after el.hidden = true (GlyphGarage's search bug, 2026-11-15). */
+[hidden] { display: none !important; }
 html, body { margin: 0; height: 100%; }
 body { background: var(--bg); color: var(--text); font: 14px/1.45 var(--font); }
 button, input, select, textarea { font: inherit; color: inherit; }
