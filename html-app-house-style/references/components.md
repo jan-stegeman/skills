@@ -102,6 +102,19 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Contrast results: Pass / Fail as a word with ✓ / ✗ in `--perfect` / `--tight` (never colour alone); a ratio is cut
   off at 2 decimals, never rounded up to a pass. Short column heads (AA, AA large …) with `white-space: nowrap`.
 
+## Calculator keys and history
+- A panel with a head row (h2, `--muted` sub line, a **Hide keys** / **Show keys** button with `aria-expanded`,
+  remembered), then a wrapping flex row: the keys (`flex: none`) and the history (`flex: 1 1 300px`), so in a small
+  window the history moves under the keys instead of getting narrow.
+- Keys: grids of 52px columns, gap 6px, key 38px high, radius 9px, `--panel` + `--elev`, `--mono` 600 15px;
+  operators in `--accent`; `=` filled (`--accent`, `--accent-text`), wide keys `span 2`. A key types at the cursor of
+  the typing line; `mousedown` is prevented so the line keeps its focus and cursor. A two-way choice (Deg / Rad) is a
+  small segment of `aria-pressed` buttons, the pressed one filled with `--accent`.
+- History: a list of buttons (line on the left, answer in `--accent` on the right, `overflow-wrap: anywhere`), newest
+  first, a fixed maximum, max-height with its own scroll; an empty text says how to fill it; **Clear history**. Kept in
+  `localStorage` via safeGet / safeSet, read with try/catch and every entry checked (broken data = empty list).
+- Sums are read by the page's own parser, never `eval` / `new Function` (the house CSP blocks them anyway).
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
