@@ -115,6 +115,13 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
   `localStorage` via safeGet / safeSet, read with try/catch and every entry checked (broken data = empty list).
 - Sums are read by the page's own parser, never `eval` / `new Function` (the house CSP blocks them anyway).
 
+## Clocks (time zones)
+- A card per city (grid `minmax(210px, 1fr)`): name 13px 600 with a × remove button (`aria-label` "Remove …"), the
+  time `--mono` 600 26px in `--accent`, then date and offset lines 12px `--muted`; the user's own zone first, marked
+  like a current card (`--accent-soft` + `--accent-ring`) and not removable.
+- A running clock changes just after each whole second of the PC (`setTimeout` to the next second, not a plain
+  1000 ms interval) and only while its page is shown. Times come from `Intl` only, never a typed offset rule.
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
