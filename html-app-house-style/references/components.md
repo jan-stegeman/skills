@@ -91,6 +91,17 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Make sound in the page (Web Audio, 5 ms fade in and out per tone); a saved sound file is built in memory and
   downloaded with a `blob:` link. Test the real download (cdp_test `"download"` step).
 
+## Colours
+- Colour tiles: grid `minmax(150px, 1fr)`, tile 104px high; on top a colour field (46px, radius 7px, inset `--line`
+  ring so white shows on a white tile), the name 12.5px `--text`, the hex code like a main code. Inline
+  `style="background:#…"` is fine under the house CSP (`style-src 'unsafe-inline'`).
+- Several codes in one table cell (`display: flex; flex-wrap: wrap; gap: 4px 6px`) instead of one column each, so the
+  table fits 960 px; each code is a self-copying `.kb` that keeps its spaces (`rgb(0, 128, 128)`).
+- Colour converter: a wide preview with white and black text on the colour and `<input type="color">` beside it
+  (Chrome's picker), then number-box rows with single-line inputs; a refused box gets `aria-invalid="true"`.
+- Contrast results: Pass / Fail as a word with ✓ / ✗ in `--perfect` / `--tight` (never colour alone); a ratio is cut
+  off at 2 decimals, never rounded up to a pass. Short column heads (AA, AA large …) with `white-space: nowrap`.
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
