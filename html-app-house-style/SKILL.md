@@ -77,7 +77,7 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
   project under `D:\AI\envs`).
 - GitHub repo `jan-stegeman/<name>`, private first. Before it goes public: full trademark check of the name (WIPO
   Global Brand Database + BOIP).
-- Also: a T3 project, a Claude project memory, a start message `D:\AI\tools\<Name>-start-message.txt`, and the
+- Also: a T3 project, a Claude project memory, a handover `D:\AI\tools\<Name>-handover.md`, and the
   Obsidian entry (`chat_to_obsidian.py` REPOS, START_MESSAGES, PROJECT_REPORTS; Index.md section).
 - Umbrel backup from the first commit: ask the user, add the repo to
   `D:\AI\tools\Dictate-Speak-work\scripts\backup-repos.json`, run `Start-ScheduledTask GitBundleBackup`, and check
