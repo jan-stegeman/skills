@@ -72,6 +72,10 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
   row has several codes, instead of one Copy per row.
 - Small tables inside a panel use their own class (not `.tbl`): the page filter works on every `.tbl tbody tr`.
 - Never name a class after a page part (`.wrap`, `.top`, `.side`, `.content`, `.card`): it takes that part's layout.
+- A choice inside a tool view (for example the kind of unit) looks like the group chips but has its own class
+  (`.kchip`, `aria-pressed`): `.chip` is wired to the page filter.
+- Unit converter: From and To each have a number box above a `<select>` of units (US and UK named once: "Pint (UK)
+  (pt)"), `=` between them, and below them a list of the value in every unit of that kind, with From and To marked.
 
 ## Drawn codes (Morse)
 - Dots and dashes as round marks in `--accent`: dot 6×6px, dash 16×6px, radius 3px, gap 3px; the text form (`.-`)
