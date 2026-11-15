@@ -122,6 +122,24 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - A running clock changes just after each whole second of the PC (`setTimeout` to the next second, not a plain
   1000 ms interval) and only while its page is shown. Times come from `Intl` only, never a typed offset rule.
 
+## World map (time zones)
+- One box with a fixed shape (`aspect-ratio`, here 3600 / 1640 = 84° N … 80° S, equirectangular), radius 10px,
+  `--elev`. Inside: an SVG for what may scale (land, lines with `vector-effect: non-scaling-stroke`, night) and
+  HTML on top, placed in %, for what keeps its pixel size (dots 5px, the sun, labels, the chosen ring).
+- Colours are app tokens in all three token blocks (`--map-sea`, `--map-land`, `--map-night`, `--map-grid`,
+  `--map-dot`, `--map-sun`); night is one semi-transparent layer per sun height (0°, -6°, -12°, -18°), so twilight
+  darkens step by step. Check in dark that the night still shows.
+- Many small dots are not tab stops: a click picks the nearest one within 16px. The user's own items are real
+  buttons with a label (name + time, `--glass`) and an `aria-label`; the chosen one gets a `--panel` label with an
+  `--accent` ring. A label goes left of its dot only when its measured box would stick out on the right (again on
+  every resize, `ResizeObserver`), never by a fixed longitude. A label may cover other dots: a mouse click within
+  6px of a dot picks that dot, elsewhere the label's own item; Enter/Space (click `detail` 0) picks the label's item.
+  Test clicks through `elementFromPoint` (what really lies on top), not by dispatching on the map. Update label text
+  in place (keep the focus).
+- Under the map: the chosen item's running clock (like a clock card), one line of facts, and action buttons; a
+  caption says what the shading means. Shapes from public-domain data, simplified at build time; sky positions from
+  published formulas, tested against known moments (equinoxes, solstices, equation of time).
+
 ## Date rows (dates, weeks, Unix time)
 - A row of labelled boxes is a wrapping flex row (`align-items: end`, gap 10px) with fixed label widths (date 190px,
   time 150px, list 150px, number 120px, wide `min(360px, 100%)`), so a small window moves boxes to the next line
