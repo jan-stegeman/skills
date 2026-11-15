@@ -53,6 +53,19 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
   `--accent` with `--accent-text`.
 - Tips ("Good to know"): `--panel-2` + `--elev`, radius 10px, padding `14px 18px`, a 3px `--accent` left edge.
 
+## Converters (two boxes that fill each other)
+- `.conv`: two equal columns (`repeat(2, minmax(0, 1fr))`, gap 16px). Each box: a head row (label 600 on the left,
+  a Copy button on the right, disabled while the box is empty), a textarea (min-height 150px, `--sunken`, 1px
+  `--line`, radius 10px, padding `10px 12px`; on focus an `--accent` border and `--panel`; codes in `--mono` 15px)
+  and a note line below it (12.5px `--muted`, min-height 20px, `aria-live="polite"`).
+- Typing in one box fills the other. The page's filter and group buttons are hidden in this view (`data-views`).
+- Never drop input silently: the note names every character or code that has no translation.
+
+## Drawn codes (Morse)
+- Dots and dashes as round marks in `--accent`: dot 6×6px, dash 16×6px, radius 3px, gap 3px; the text form (`.-`)
+  below them in `--mono` 12px with letter-spacing .12em; tile grid `minmax(104px, 1fr)`. The marks are
+  `aria-hidden`; the tile's label says the code as text.
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
