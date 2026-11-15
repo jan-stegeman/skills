@@ -117,9 +117,16 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 
 ## Clocks (time zones)
 - A card per city (grid `minmax(210px, 1fr)`): name 13px 600 with a × remove button (`aria-label` "Remove …"), the
-  time `--mono` 600 26px in `--accent`, then date and offset lines 12px `--muted`; the user's own zone is marked like a
-  current card (`--accent-soft` + `--accent-ring`) and not removable. Cards go in time order by their UTC offset now:
-  behind the user on the left, their own zone, ahead on the right (same offset: order added); redraw when it changes.
+  time `--mono` 600 26px in `--accent`, under it the same time on the 12-hour clock (`--mono` 600 13px `--text-2`,
+  "9:07 PM"), then date, the zone's own name from `Intl` ("Central European Standard Time") and offset lines 12px
+  `--muted`; the user's own zone is marked like a current card (`--accent-soft` + `--accent-ring`), not removable, and
+  has no "Here:" in its title (a `.sr-only` ", your own zone" for screen readers). Cards go in time order by their UTC
+  offset now: behind the user on the left, their own zone, ahead on the right (same offset: order added); redraw when
+  it changes.
+- A converted time uses the same cards, static and as buttons (a click copies "2026-11-16 03:07"): In = To side by
+  side (a small uppercase tag "In" / "To", To marked), and the same moment in every city below, in time order.
+- Explain the clock words once on the page: UTC never changes; the user's zone in winter and summer (computed);
+  24-hour and AM / PM (AM before noon, 00:30 = 12:30 AM, 12:00 = 12:00 PM); times come from the PC's clock.
 - A running clock changes just after each whole second of the PC (`setTimeout` to the next second, not a plain
   1000 ms interval) and only while its page is shown. Times come from `Intl` only, never a typed offset rule.
 
