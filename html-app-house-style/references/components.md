@@ -158,6 +158,22 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Calendar rules come from the browser's own `Date` in UTC (leap years, days of a month), never a typed table; an
   input the date box lets through (year 10000) is named, never a page error.
 
+## Settings and the Internet switch (an offline app that may go online)
+- Off by default, enforced by the page, not only by code: the CSP `<meta>` names the only hosts (`connect-src`), and
+  a script in `<head>` right after it adds a second `<meta>` `connect-src 'none'` while the switch is off. Policies
+  only add up, so "on" = remember it and reload without that tag; "off" = add the tag at once. The build checks both.
+- The top-bar status pill is a button that opens Settings: **Offline** neutral grey with a lock; **Online** in
+  `--marginal` on `--marginal-soft` with a globe, so it is never missed. Settings is a `dialog.dlg` (also in the ☰ menu).
+- The switch is a `.toggle` with `role="switch"` and `aria-checked`, plus a small On/Off chip (`aria-hidden`); its
+  state sentence beside it. Turning it on shows a warning panel first (`--marginal-soft`, 3px `--marginal` left
+  border): a table of every host with what for, when and what it sees (IP address and time), then a filled
+  **Allow** and a plain **Cancel**. The table is built from the same host list as the policy; a test compares them.
+- Under it, "What the page uses the internet for": one `dl` row per job with the data's date, when it was fetched,
+  the last check, a fault in words and the next try; a manual "Get … now" button only while on.
+- Requests: credentials omitted, no referrer, no cache, no redirects, a time limit, short JSON read as numbers only,
+  back-off after faults, nothing while the page is hidden. Tests never reach the internet: intercept every request
+  (CDP Fetch), answer with fakes, count them, and count requests the policy blocked.
+
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
   no cut text, equal boxes, equal rows. Then a page-only picture of the user's Chrome (after their OK).
