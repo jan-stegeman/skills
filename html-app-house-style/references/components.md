@@ -170,6 +170,14 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
   **Allow** and a plain **Cancel**. The table is built from the same host list as the policy; a test compares them.
 - Under it, "What the page uses the internet for": one `dl` row per job with the data's date, when it was fetched,
   the last check, a fault in words and the next try; a manual "Get … now" button only while on.
+- Data from the internet shows its age where the answer is, not only in a grey note: a label right under the answer
+  (`--panel-2`, 1px `--line-2` ring, text colour, clock icon in `--accent`, date and time 600) such as "ECB rates of
+  2026-11-16 · fetched 2026-11-16 18:08 from …" (no "today" or "3 days ago": the user reads the date), also
+  offline; built-in data says so. The grey note and the card heading then leave the date out: one place only.
+- Favourites in a card grid: a small star button at the card's top right (☆ / ★ in `--marginal`, `aria-pressed`, its
+  own label), outside the copy button; `.fchip` buttons "★ Favourites (n)" / "All n" above the grid (never `.kchip`,
+  which the kind buttons use). A maximum is said in a toast; starring in "All" keeps "All" in view; the focus stays
+  on the star after the grid is drawn again.
 - Requests: credentials omitted, no referrer, no cache, no redirects, a time limit, short JSON read as numbers only,
   back-off after faults, nothing while the page is hidden. Tests never reach the internet: intercept every request
   (CDP Fetch), answer with fakes, count them, and count requests the policy blocked.
