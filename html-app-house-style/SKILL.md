@@ -46,7 +46,7 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 
 ## 5. Accent Colour per App
 - Each app has its own accent (`--accent`, `--accent-2`, `--accent-soft`, `--accent-text`, `--accent-ring`) in all three
-  token blocks, and logo tokens `--logo-1/2/3`, `--logo-glow`. Taken: TensorTailor indigo, GlyphGarage teal.
+  token blocks, and logo tokens `--logo-1/2/3`, `--logo-glow`. Taken: TensorTailor indigo, GlyphGarage teal, PromptPrism fuchsia.
 - A new app: pick a free colour (rules in apps.md), show the user 2-3 choices as pictures in light and dark, let them
   choose, then add the app to apps.md.
 

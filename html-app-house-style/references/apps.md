@@ -7,6 +7,7 @@ Each app has its own accent, so the user sees at once which app is open. Everyth
 |---|---|---|---|---|---|
 | TensorTailor | `D:\AI\tools\llmfit-studio` | jan-stegeman/tensortailor | `tt-theme` | indigo | "T" line icon |
 | GlyphGarage | `D:\AI\tools\glyph-garage` | jan-stegeman/glyphgarage (private) | `gg-theme` | teal | "G" with a spark |
+| PromptPrism | `D:\AI\tools\prompt-prism` | jan-stegeman/promptprism (planned, private) | `pp-theme` | fuchsia | prism: triangle, one ray in, two out |
 
 ## Accent tokens
 
@@ -37,12 +38,26 @@ Put them in the same three blocks as the shared tokens: `:root`, the dark `@medi
 
 Note: teal is close to the green status colour (`--perfect`), so GlyphGarage's "Offline" badge is neutral grey.
 
+### PromptPrism: fuchsia (chosen by the user 2026-11-18 from fuchsia, pink and purple)
+
+| Token | Light | Dark |
+|---|---|---|
+| `--accent` | `#a21caf` | `#e879f9` |
+| `--accent-2` | `#86198f` | `#d946ef` |
+| `--accent-soft` | `rgba(162, 28, 175, .09)` | `rgba(232, 121, 249, .13)` |
+| `--accent-text` | `#ffffff` | `#1a0520` |
+| `--accent-ring` | `rgba(162, 28, 175, .3)` | `rgba(232, 121, 249, .35)` |
+| logo 1 / 2 / 3 / glow | `#f5b4ff` / `#d946ef` / `#86198f` / `rgba(217, 70, 239, .42)` | same |
+
+Contrast measured in headless Chrome: accent on panel 6.3:1 light / 7.4:1 dark, on bg 5.8:1 / 8.0:1, button text
+6.3:1 / 7.9:1.
+
 ## Picking a colour for a new app
 
 - Not used by another app above, and clearly different from the status colours: green `--perfect` (good),
   blue `--good` (info), amber `--marginal` (warning), red `--tight` (fault). Those keep their meaning in every app.
-- Free examples: fuchsia (light `#a21caf`, dark `#e879f9`), rose (light `#be123c`, dark `#fb7185`). Rose is near red:
-  only for an app without fault messages.
+- Free examples: rose (light `#be123c`, dark `#fb7185`), pink (light `#be185d`, dark `#f472b6`). Rose and pink are
+  near red: only for an app without fault messages. Purple (`#7e22ce` / `#c084fc`) is close to TensorTailor's indigo.
 - Contrast (WCAG AA, 4.5:1 or more), checked by the script: `--accent` on `--panel` and on `--bg`, and
   `--accent-text` on `--accent`, in light and in dark.
 - Show the user 2-3 accent choices as pictures (light and dark) and let them choose.
