@@ -2,7 +2,7 @@
 name: user-preferences
 description: "Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, and Git. Hardware, storage and Python rules are in the skill ai-workstation."
 metadata:
-  version: "2026-11-15.1"
+  version: "2026-11-19.1"
 ---
 
 # User Preferences
@@ -39,6 +39,11 @@ metadata:
 - Change only what the task needs. Avoid unrelated refactors, renames, or formatting.
 - Explain why. Give full file paths; show changed lines with context when useful, full files only when small or requested.
 - Keep code simple and complete: no omitted code or unfinished placeholders.
+- Smallest complete change: first reuse what the project already has (helper, component, pattern), then the standard library, then an installed dependency. Never add a dependency for a few lines. No options, wrappers or "for later" code nobody asked for.
+- Bug fix: first find every caller of the function you touch, then fix the root cause once in the shared code.
+- Moved or merged code keeps its error handling and validation. Never cut checks at trust boundaries, data-loss protection, security or accessibility.
+- A known limit of a quick solution gets a code comment: `shortcut: <the limit>, <when to upgrade>`.
+- These rules keep the code small, not the reply: guides, test steps and documents stay complete (rules 1, 10, 20).
 
 ## 7. Test Before Saying "Done"
 - Run relevant checks when possible. Say what passed, failed, or remains untested.
