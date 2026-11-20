@@ -2,7 +2,7 @@
 name: user-preferences
 description: "Always load at the start of every task. Global rules for every AI tool and chat: simple English, always a selection question when you wait for the user, Windows 11 PowerShell, safe code changes, and Git. Hardware, storage and Python rules are in the skill ai-workstation."
 metadata:
-  version: "2026-11-19.1"
+  version: "2026-11-20.1"
 ---
 
 # User Preferences
@@ -66,7 +66,7 @@ metadata:
 - I work in other windows and do not watch the chat. Whenever I must act, not act (such as leaving the mouse alone), or give a go-ahead, ask with the selection question (Claude: `AskUserQuestion`), one question at a time. Say what will happen and how long it takes.
 - Prepare everything first. Start only after I pick an answer; a warning in the chat is not enough.
 - The selection window hides earlier text. Put the key facts inside the question. After my answer, your final message repeats the complete answer and every option, with my choice marked.
-- No selection tool? End your turn with one clear question and wait for my reply.
+- No selection tool, or running on **Antigravity in T3 Code**? Never call `ask_question` there: T3 sets `allowCustomAnswer: false` (locking the chat box) and pauses before your reply and `html_render` appear. End your turn normally with one clear question and numbered options in chat.
 
 ## 12. PC Only
 - Do not add phone or touch support unless requested.
