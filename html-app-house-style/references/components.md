@@ -203,7 +203,7 @@ Agreed 2026-11-20/21 (PromptPrism, mockup approved, then a second-model UI revie
   (one picture pixel on one screen pixel), − / + and the wheel, and a typed zoom percentage box.
 - History column: Undo / Redo (icons), Original, a bin icon for Clear history… (a short question), the steps as a
   list (click = go back), a tip box that names Ctrl + Z / Ctrl + Y (wide windows only). The card's history uses the
-  same icons with words and a hint line under its list ("No steps yet: …" and the keys).
+  same icons with words and a hint line under its list ("No edits yet. …" and the keys).
 - Footer: a state line (`aria-live`; "Not applied yet: …"), honest step progress for full-size work ("Step 2 of 3 …"
   plus seconds, never a fake percentage), Download "Download the …" (download icon), a filled Apply, Close `Esc`.
 - Short button rows in a narrow panel never leave one button alone: a grid (ratios 3 per row; 2 + 1 full width).
