@@ -13,11 +13,18 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Equal boxes in one row: `display: grid; grid-template-columns: repeat(N, minmax(0, 1fr)); gap: 10px`.
 - Each box `--panel-2` + `--elev`, radius 10px, padding `10px 12px 10px 42px`; the number in a 20px accent circle,
   `position: absolute; left: 12px; top: 10px`. Never a wrapping flex row (uneven steps look homemade).
+- A sub line under the step name gets at most 2 lines (`-webkit-line-clamp: 2`, `text-wrap: balance`, no single word
+  alone) and the whole text as its `title`.
 
 ## Toolbar
 - View switch = real tabs (`role="tablist"`, arrow keys, Home/End, only the chosen tab has `tabindex="0"`),
   buttons 32px high. Filter box 36px high, at most 460px wide. Group chips 30px high, 12.5px text.
 - Controls that belong to some views only get `data-views="a b"` and are hidden in the other views.
+- Many tabs in a narrow column (PromptPrism's result): short names on the buttons where needed; such a tab gets the
+  full name as `title` and an `aria-label` that holds the visible name too (for example "JSON: Raw answer", plus
+  ", 3 missing"). A row that still does not fit scrolls sideways instead of wrapping (`flex-wrap: nowrap;
+  overflow-x: auto`, buttons `flex: none`, focus ring inside the button with `outline-offset: -2px`); the render
+  code saves and restores `scrollLeft` when it draws the row again and scrolls the chosen tab into view.
 
 ## Tiles (cheat-sheet view)
 - Grid `repeat(auto-fill, minmax(86px, 1fr))`, gap 8px; tile 94px high, `--panel-2` + `--elev`, radius 10px.
@@ -181,6 +188,38 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Requests: credentials omitted, no referrer, no cache, no redirects, a time limit, short JSON read as numbers only,
   back-off after faults, nothing while the page is hidden. Tests never reach the internet: intercept every request
   (CDP Fetch), answer with fakes, count them, and count requests the policy blocked.
+
+## Picture editor (one dialog for picture tools)
+Agreed 2026-11-20/21 (PromptPrism, mockup approved, then a second-model UI review). Reference: PromptPrism
+`web/app.html` (`dialog#dlgEdit`, `ed-*` CSS).
+- One big `dialog.dlg.editor` (`min(1560px, 96vw)` × 92vh) instead of one dialog per tool. Grid: tool rail 84px |
+  tool panel 380px | preview `minmax(0, 1fr)` | history 220px. At 1280px or less the history goes under the panel
+  (panel 360px, history row 210px, its tip box hidden); when the window is ALSO low (max-width 1280px and
+  max-height 820px) the dialog is 96vh and the history row 140px. A wide, low window keeps 92vh and the column.
+- Tool rail = a vertical `role="tablist"` (ArrowUp / ArrowDown, Home / End): tiles 72px high and `flex: none` (a 2-line name
+  fits, every tile the same, the rail scrolls), a 22px line icon above an 11.5px name; a small `--marginal` dot on
+  a tool with changes not applied yet. The card that opens the editor keeps quick buttons with the SAME icons.
+- Preview: Before / Split / After (`aria-pressed`), a split line with a round grip (also arrow keys), Fit, 100%
+  (one picture pixel on one screen pixel), − / + and the wheel, and a typed zoom percentage box.
+- History column: Undo / Redo (icons), Original, a bin icon for Clear history… (a short question), the steps as a
+  list (click = go back), a tip box that names Ctrl + Z / Ctrl + Y (wide windows only). The card's history uses the
+  same icons with words and a hint line under its list ("No steps yet: …" and the keys).
+- Footer: a state line (`aria-live`; "Not applied yet: …"), honest step progress for full-size work ("Step 2 of 3 …"
+  plus seconds, never a fake percentage), Download "Download the …" (download icon), a filled Apply, Close `Esc`.
+- Short button rows in a narrow panel never leave one button alone: a grid (ratios 3 per row; 2 + 1 full width).
+
+## Empty states and caution labels
+- An area with nothing yet (no result, a stage not built yet): GlyphGarage's `.empty-state`, a 1px dashed
+  `--line-2` box, radius 10px, padding 16px, muted 13px centred text. Say what will be there and how to get it (with
+  the key, `<kbd>`), and offer one way on: a button (Load an example, only when there are examples) or a "Go to …"
+  link (`a.sbtn`, no underline) whose click opens that stage and moves the focus to it in the side bar.
+- A drop zone is NOT an empty-state box: a 2px dashed `--line-2` border, radius 12px, `--sunken`, min-height 240px,
+  centred text, and a 36px picture line icon (stroke 1.5) in `--faint` above it.
+- A side-bar item that is not built yet: a small "soon" tag (`--sunken`, `--faint`, 10.5px) with a screen-reader comma.
+- A grey (disabled) main button gets a line under it that says why and what to do; that line is its
+  `aria-describedby`.
+- "Not a real result" (a test engine, an example): an amber label (`--marginal` on `--marginal-soft`), never red:
+  red only means a fault.
 
 ## Check
 - Look at every test picture in light and dark, at 1600 px and at a small window (1100 px): no horizontal scroll,
