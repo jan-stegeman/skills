@@ -8,6 +8,9 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Content area: padding `24px 28px 48px`; store the top padding in `--content-pad-top` (sticky headers use it).
 - Card: `--panel`, `--radius`, `--elev`, padding `22px 26px 26px`, `max-width: 1480px` (no empty band on wide
   screens, no endless lines). Title `h1` 22px weight 650 (`--display`), one `--muted` sub line of 14px.
+- Scrollbars: the thin `::-webkit-scrollbar` block of `house-style.css` (8px, a `--line-2` thumb, `--faint` on hover,
+  no track and no arrows), in lists, tables, dialogs and Help alike. Never set `scrollbar-width` or `scrollbar-color`
+  on an element: Chrome 121+ then shows its own bar there and ignores the block (agreed 2026-11-21).
 
 ## Steps ("how to")
 - Equal boxes in one row: `display: grid; grid-template-columns: repeat(N, minmax(0, 1fr)); gap: 10px`.
@@ -19,6 +22,10 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 ## Toolbar
 - View switch = real tabs (`role="tablist"`, arrow keys, Home/End, only the chosen tab has `tabindex="0"`),
   buttons 32px high. Filter box 36px high, at most 460px wide. Group chips 30px high, 12.5px text.
+- The chosen tab is `--panel` on a `--panel-2` track. In dark mode `--panel` is darker than the track (1.06:1), so
+  there, in both dark paths, it is `color-mix(in srgb, var(--text) 9%, var(--panel-2))` (1.27:1); the search box in
+  dark gets `.search:not(:focus-within) { border-color: var(--line-2); }` (keeps the accent line on focus).
+  PromptPrism `.tabs` and GlyphGarage `.seg` (2026-11-21).
 - Controls that belong to some views only get `data-views="a b"` and are hidden in the other views.
 - Many tabs in a narrow column (PromptPrism's result): short names on the buttons where needed; such a tab gets the
   full name as `title` and an `aria-label` that holds the visible name too (for example "JSON: Raw answer", plus

@@ -114,6 +114,13 @@ a { color: var(--accent); }
 kbd { font: 11px var(--mono); padding: 1px 6px; border-bottom-width: 2px; border-radius: 5px; color: var(--muted); }
 kbd { border: 0; box-shadow: inset 0 0 0 1px var(--line-2), 0 1px 0 var(--line-2); background: var(--panel); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+/* Thin, quiet scrollbars instead of the thick classic ones with arrows (TensorTailor's block). No element may set
+   scrollbar-width or scrollbar-color: Chrome then ignores these rules for it. */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--faint); background-clip: padding-box; border: 2px solid transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
 h1, h2, .brand-name, .dlg-head h2 { font-family: var(--display); letter-spacing: -.01em; }
 
 /* Brand (top left): logo square + name + version line (TensorTailor lines 161, 600-603). The logo colours come
