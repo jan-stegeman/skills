@@ -40,7 +40,9 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
   stroke 2.2), the name (`--display`, 700, 15px), and under it the version line (`.brand-sub`, 11px, `--faint`).
 - Middle: search with a `/` key hint (`<kbd>/</kbd>`); `/` focuses it, `Esc` clears or leaves it.
 - Right, icon buttons: Help (`?` opens it, `Esc` closes) and a Tools menu (☰) with "Light or dark" (key `T`, a
-  half-filled circle icon) and "About and licenses"; an app may add its own items to that menu.
+  half-filled circle icon) and "About and licences"; an app may add its own items to that menu.
+- App text is natural British English (owner, 2026-11-21): colour, analyse, the noun "licence"; "license" only as a
+  verb or in a name such as "MIT License". Code names never change.
 - Theme: follows Windows (`prefers-color-scheme`) until the user chooses "Light or dark"; the choice goes in
   `localStorage` under `<prefix>-theme` (see apps.md) as `data-theme` on `<html>`. Wrap storage in try/catch
   (`safeGet`/`safeSet`).
@@ -66,7 +68,7 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
   inline style and script); its test proves zero network requests. An app that must use the network (TensorTailor:
   Hugging Face) names every host in README and SECURITY.md.
 - Data (codes, word lists, tables) is never typed by hand: compute it or take the official file, test it, and list
-  each source with its license in THIRD-PARTY-NOTICES.md.
+  each source with its licence in THIRD-PARTY-NOTICES.md.
 
 ## 8. Project Setup
 - Folder `D:\AI\tools\<folder>`; `web\` source, `dist\` output (ignored), `tools\` scripts and tests; `PROGRESS.md`,
@@ -109,7 +111,7 @@ the app's test list from the first step; it must print `OK public ready`:
   addresses or e-mail addresses in the files, their history, commit messages or the built page; work notes in git;
   a missing public file; a workflow action not pinned by SHA, without `permissions:` or `persist-credentials: false`.
 - Private words: `~/.config/public-ready/private.txt`, on the PC only. Accept a third-party hit (an address a
-  license requires) only with a narrow `--allow` regex and a comment in the test script.
+  licence requires) only with a narrow `--allow` regex and a comment in the test script.
 - Never print a private value in chat or logs in full. Workflows: token with least rights, Dependabot for actions.
 - Going public: follow `references/going-public.md`; every step only after the user's OK.
 - After a change to the script, run `scripts\test_check_public_ready.py` ("all ... tests passed").
