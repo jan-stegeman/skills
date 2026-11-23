@@ -14,6 +14,7 @@
   --panel-2: #f6f7fa;
   --line: rgba(16, 24, 40, .09);
   --line-2: rgba(16, 24, 40, .15);
+  --field-line: #7a8493; /* the border of an input field, list or search box: 3.4:1 or more on --panel, --panel-2, --raised, --sunken and --bg (WCAG 1.4.11; owner's choice B, 2026-11-23) */
   --raised: #f7f8fa;
   --sunken: #f1f3f6;
   --hover: #f4f6f9;
@@ -45,6 +46,7 @@
   --panel-2: #161b23;
   --line: rgba(255, 255, 255, .07);
   --line-2: rgba(255, 255, 255, .11);
+  --field-line: #646e80; /* 3.3:1 or more on --panel, --panel-2, --raised, --sunken and --bg */
   --raised: #161b23;
   --sunken: #0d1016;
   --hover: #161b24;
@@ -75,6 +77,7 @@
   --panel-2: #161b23;
   --line: rgba(255, 255, 255, .07);
   --line-2: rgba(255, 255, 255, .11);
+  --field-line: #646e80; /* 3.3:1 or more on --panel, --panel-2, --raised, --sunken and --bg */
   --raised: #161b23;
   --sunken: #0d1016;
   --hover: #161b24;

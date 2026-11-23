@@ -23,9 +23,13 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - View switch = real tabs (`role="tablist"`, arrow keys, Home/End, only the chosen tab has `tabindex="0"`),
   buttons 32px high. Filter box 36px high, at most 460px wide. Group chips 30px high, 12.5px text.
 - The chosen tab is `--panel` on a `--panel-2` track. In dark mode `--panel` is darker than the track (1.06:1), so
-  there, in both dark paths, it is `color-mix(in srgb, var(--text) 9%, var(--panel-2))` (1.27:1); the search box in
-  dark gets `.search:not(:focus-within) { border-color: var(--line-2); }` (keeps the accent line on focus).
-  PromptPrism `.tabs` and GlyphGarage `.seg` (2026-11-21).
+  there, in both dark paths, it is `color-mix(in srgb, var(--text) 9%, var(--panel-2))` (1.27:1). PromptPrism `.tabs`
+  and GlyphGarage `.seg` (2026-11-21).
+- Input fields, lists (`select`), number boxes and search boxes: a 1px `--field-line` border on a `--sunken` fill;
+  on focus the border is `--accent`. `--field-line` stands out 3:1 or more from `--panel`, `--panel-2`, `--raised`, `--sunken`
+  and `--bg` (3.4:1 light, 3.3:1 dark; WCAG 1.4.11 asks 3:1 for the edge that shows where a control is), and
+  `check_house_style.py` checks it. Never `--line` or `--line-2` for a field's edge: 1.3:1 is too faint (owner's
+  choice B, 2026-11-23; this replaces the dark-only `--line-2` border of the search box).
 - Controls that belong to some views only get `data-views="a b"` and are hidden in the other views.
 - Many tabs in a narrow column (PromptPrism's result): short names on the buttons where needed; such a tab gets the
   full name as `title` and an `aria-label` that holds the visible name too (for example "JSON: Raw answer", plus

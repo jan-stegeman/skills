@@ -32,6 +32,7 @@ CASES = [
     ("missing accent token in a dark block", page(chosen=DARK.replace("--accent-ring: rgba(45, 212, 191, .35);", "")), 1),
     ("accent differs between the dark blocks", page(chosen=DARK.replace("#2dd4bf", "#5eead4")), 1),
     ("accent with low contrast", page(light=LIGHT.replace("#0f766e", "#5eead4")), 1),
+    ("missing field border token", page(css=CSS.replace("--field-line: #646e80;", "")), 1),
     ("dark block outside its @media", page(css=CSS.replace("@media (prefers-color-scheme: dark) {", "/* no media */", 1)
                                            .replace("--data: #6b7789;\n}\n}", "--data: #6b7789;\n}"), media=False), 1),
 ]
@@ -54,6 +55,15 @@ WARNING_CASES = [
      page(css=CSS.replace("[hidden] { display: none !important; }", "")), 0, True),
 ]
 
+# (name, page, expected exit code, text the output must contain): the contrast rule itself, not only the token match.
+# A faint value also differs from the reference, so the exit code alone proves nothing: the output must name the
+# contrast fault, which only the contrast check writes.
+FAINT = CSS.replace("--field-line: #7a8493;", "--field-line: #cfd2d7;")
+OUTPUT_CASES = [
+    ("field border at 3:1 or more is measured", page(), 0, "light: --field-line on --sunken = 3.40:1"),
+    ("field border too faint fails on contrast", page(css=FAINT), 1, "light: --field-line on --sunken = 1.36:1 (below 3)"),
+]
+
 
 def main():
     failed = 0
@@ -72,6 +82,13 @@ def main():
             if code != want or ("WARNING" in out) != warn:
                 failed += 1
                 print(f"FAIL {name}: exit {code}, warning shown: {'WARNING' in out}")
+        for i, (name, html, want, text) in enumerate(OUTPUT_CASES):
+            path = Path(tmp) / f"out{i}.html"
+            path.write_text(html, encoding="utf-8")
+            code, out = run_full(path)
+            if code != want or text not in out:
+                failed += 1
+                print(f"FAIL {name}: exit {code}, '{text}' shown: {text in out}")
         bad = Path(tmp) / "not-utf8.html"
         bad.write_bytes(b"<style>\xff\xfe:root{}</style>")
         if run(bad) != 2:
@@ -80,7 +97,7 @@ def main():
         if run(Path(tmp) / "missing.html") != 2:
             failed += 1
             print("FAIL a missing file must give exit 2")
-    total = len(CASES) + len(WARNING_CASES) + 2
+    total = len(CASES) + len(WARNING_CASES) + len(OUTPUT_CASES) + 2
     print(f"{total - failed} of {total} tests passed" if failed else f"all {total} tests passed")
     return 1 if failed else 0
 

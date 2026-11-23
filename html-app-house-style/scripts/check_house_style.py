@@ -144,6 +144,15 @@ def check(path, ref):
                 continue
             ratio = contrast(fg, bgc)
             (faults if ratio < 4.5 else notes).append(f"{theme}: {label} = {ratio:.2f}:1" + (" (below 4.5)" if ratio < 4.5 else ""))
+        # The border of an input field must stand out from the field and from what is around it: 3:1 (WCAG 1.4.11).
+        field = parse_colour(tokens.get("--field-line", ""), panel or (1, 1, 1))
+        for under in ("--panel", "--panel-2", "--raised", "--sunken", "--bg"):  # every surface a field sits on
+            bgc = parse_colour(tokens.get(under, ""))
+            if field is None or bgc is None:
+                faults.append(f"{theme}: cannot read the colours for --field-line on {under}")
+                continue
+            ratio = contrast(field, bgc)
+            (faults if ratio < 3 else notes).append(f"{theme}: --field-line on {under} = {ratio:.2f}:1" + (" (below 3)" if ratio < 3 else ""))
     return shared, faults, notes
 
 
