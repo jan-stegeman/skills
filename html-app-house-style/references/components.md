@@ -66,6 +66,14 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Menu glyphs: 26px tiles, radius 7px, `--panel-2` + `--elev`, `600 11.5px var(--mono)`; the open tool's tile is
   `--accent` with `--accent-text`.
 - Tips ("Good to know"): `--panel-2` + `--elev`, radius 10px, padding `14px 18px`, a 3px `--accent` left edge.
+- Toast and the screen-reader line inside dialogs (2026-11-23, PromptPrism): a modal `dialog` (`showModal()`) lies
+  in the top layer, covers everything else and makes the rest of the page inert, so a `#toast` or `aria-live` line
+  outside it is hidden under it and not read aloud. Move both into the dialog opened last (a MutationObserver on the
+  `open` attribute of every dialog, a stack of open ones; back to `body` when none is open), before any text is set.
+  In a dialog with a button bar (`.dlg-foot`) the toast sits 12px above that bar (`position: absolute`), never over
+  its buttons. A fallback `<textarea>` for Copy goes into the same dialog. Test it: `document.elementFromPoint` at
+  the toast's centre is the toast while a dialog is open. (GlyphGarage and TensorTailor still had the toast outside
+  their dialogs on 2026-11-23: each app's own chat fixes it.)
 
 ## Converters (two boxes that fill each other)
 - `.conv`: two equal columns (`repeat(2, minmax(0, 1fr))`, gap 16px). Each box: a head row (label 600 on the left,
@@ -214,6 +222,24 @@ Agreed 2026-11-20/21 (PromptPrism, mockup approved, then a second-model UI revie
 - Footer: a state line (`aria-live`; "Not applied yet: …"), honest step progress for full-size work ("Step 2 of 3 …"
   plus seconds, never a fake percentage), Download "Download the …" (download icon), a filled Apply, Close `Esc`.
 - Short button rows in a narrow panel never leave one button alone: a grid (ratios 3 per row; 2 + 1 full width).
+  Presets too: a 2-column grid of equal cells, names centred (never one preset alone on a row).
+Added 2026-11-23 (PromptPrism reviews of 2026-11-22/23, the owner's OK):
+- Opening: the rail scrolls the chosen tool's tile into sight (only the rail, never the dialog) and the keyboard
+  starts on that tile. Rail and panel show soft scroll shadows at an edge with more content.
+- Split waits for a change: with nothing changed, the split line, its grip and the Before/After labels stay hidden
+  (two equal halves say nothing); they appear at the first change. Tools with one view (Crop, Rotate, Four corners)
+  show only the result and hide Before / Split / After.
+- The checkerboard sits only behind the picture (where it is see-through), never over the whole stage.
+- Sub-tabs inside a panel (Light & tone / Colour / Effects) fill their row (`flex: 1 0 auto`).
+- A number box keeps Apply ready while you type in it: a grey Apply under the mouse would lose the click; the
+  typed number counts on Enter, on leaving the box, or when Apply is clicked.
+- Every tool panel ends with a Reset row (`.snd`, small secondary buttons): "Reset" puts that tool's settings back
+  to the values the editor opens with; "Reset all" on a panel with tabs or groups, next to "Reset this channel" /
+  "Reset this group". The picture and the history never change. Each Reset says what it did in one short toast
+  ("Crop box reset.", "Rotation reset. New size: …") and clears the footer message; when there is nothing to reset
+  it says so.
+- Footer: the message has its own space (`flex: 1 1 260px`, it wraps to two lines) so the buttons stay on one row
+  at 1100px. A hint in the footer (a practice hint, a reset note) goes at the first change, as every footer message.
 
 ## Empty states and caution labels
 - An area with nothing yet (no result, a stage not built yet): GlyphGarage's `.empty-state`, a 1px dashed
