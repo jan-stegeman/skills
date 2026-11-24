@@ -97,6 +97,7 @@ metadata:
 
 ## 18. Git
 - Check the branch and existing changes first.
+- Before every commit or push, follow the skill `ship-check` (small for each commit, version for a release).
 - Use Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
 - Every commit names the model and its effort level, e.g. subject `Implemented by Claude Opus 5.5 High: fix(web): ...`. Unknown level: ask me once. Release commits (`release X.Y.Z`) keep their subject.
 - A Claude model is also the author, same name, so GitHub lists Claude as Contributor (public repos only): `git commit --author="Claude Opus 5.5 High <noreply@anthropic.com>" -F msg.txt`. The committer stays the user. Gemini, GPT and Codex keep the user as author.
