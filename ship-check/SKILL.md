@@ -32,7 +32,9 @@ git hooks (`~/.githooks`: commit-msg, pre-push) stay the hard safety net; this l
    tell the user. After a push to a repo with GitHub Actions: wait for the run, report its result, then show the cost
    overview (`D:\AI\uv\python\cpython-3.13.18-windows-x86_64-none\python.exe -I D:\AI\tools\actions_usage_all.py`).
 8. **Log.** One row in `D:\AI\tools\Dictate-Speak-work\research\log\YYYY-MM-DD.md` (time from `Get-Date`), then
-   `D:\AI\tools\Dictate-Speak-work\scripts\check_vault_yaml.py` must report 0 invalid. Say it in one line.
+   this must report 0 invalid (the script needs `yaml` and the vault folder):
+   `& "D:\AI\envs\skillspector\Scripts\python.exe" -I -X utf8 "D:\AI\tools\Dictate-Speak-work\scripts\check_vault_yaml.py" "D:\AI\tools\Dictate-Speak-work\research"`.
+   Say it in one line.
 
 ## 3. Level version (adds to small)
 9. Read the whole README before the push.
