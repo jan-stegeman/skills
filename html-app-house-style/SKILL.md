@@ -76,6 +76,10 @@ icon differ. TensorTailor (`D:\AI\tools\llmfit-studio`) is the reference. Agreed
 - Files like TensorTailor: README.md (with a "No warranty" line), LICENSE (MIT), SECURITY.md, CONTRIBUTING.md,
   ACCESSIBILITY.md, THIRD-PARTY-NOTICES.md, `.github` PR template and issue forms (`ISSUE_TEMPLATE\*.yml`,
   `config.yml` with blank issues off), `.gitattributes`. Repo-local git e-mail: the GitHub no-reply address.
+- CHANGELOG.md from the first commit (user, 2026-11-25): Keep a Changelog, newest first, one block per day
+  `## [YYYY.MM.DD] - YYYY-MM-DD` with Added / Changed / Fixed, one sentence per change with its commit in backticks;
+  every commit adds its line, and the README links to it at the top. The USB stick turns it into `WHATS-NEW.html`;
+  a new app also gets an entry in `D:\AI\tools\Dictate-Speak-work\scripts\usb-kit\apps.json`.
 - Build script: `web\build.mjs` (Node) like TensorTailor; data generators may be Python (one environment per
   project under `D:\AI\envs`).
 - GitHub repo `jan-stegeman/<name>`, private first. Before it goes public: full trademark check of the name (WIPO
