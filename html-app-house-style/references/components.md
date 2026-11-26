@@ -165,6 +165,20 @@ Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windo
   `aria-pressed`, keep the panel open; the keys change to sin⁻¹ …, sinh …), Function `|x| ⌊x⌋ ⌈x⌉ / rand →dms →deg`.
   One panel at a time; it closes after a function, with Esc, a click outside or when the focus leaves; opened with
   the keyboard the focus goes to its first key and Esc returns it to the button. Standard has no menus.
+- Programmer (GG 37, like Windows 11 Programmer): the tab **Programmer** after Scientific; the same 452px device and
+  5-column pad (46px keys, Windows' order `A « » C ⌫ / B ( ) % ÷ / C 7 8 9 × / D 4 5 6 − / E 1 2 3 + / F ± 0 . =`;
+  digits outside the base and `.` grey). Under the display four rows HEX DEC OCT BIN (`role="radio"`, label 600 12px
+  `--muted`, value 13.5px `--mono`; the chosen one has a 3px `--accent` bar and an accent label; a click chooses the
+  base to type in; Copy icon on hover/focus); BIN keeps room for two lines so nothing moves. Then a row: real tabs
+  **Keys | Bits** and a flat word-size button (QWORD → DWORD → WORD → BYTE). The menus row has **Bitwise** (panel of
+  keys AND OR NOT / NAND NOR XOR) and **Bit shift** (a radio list of the four shift modes, drawn once so arrow keys
+  keep the focus; « » become RoL RoR in the rotate modes). **Bits** replaces the pad by 64 bit buttons in 4 rows of 4
+  groups (mono 600 19px, a 1 in `--accent`, bits above the word size grey and disabled, the bit number under every 4th
+  bit, one tab stop with arrow keys), exactly as high as the pad. A 64-bit BIN answer shows on two lines over the
+  (then transparent) input. The angle unit is hidden. Keys of Windows (`& | ^ ~ < > . \`, A–F, F9) but none of its
+  F-keys for base and word size (the browser's). Engine: whole numbers in two's complement, every result wraps; Windows'
+  rules (÷ and % toward 0, shift ≥ word size has no result, precedence × ÷ % Lsh Rsh > + − > AND NAND NOR > OR XOR;
+  a word-size change keeps what was already worked out); tested against Python's integers and Windows' own answers.
 - Rules taken from Windows' own engine (microsoft/calculator, MIT: rules only, no code): numbers written by its
   NumberToString (P = 16 or 32: below 1 the zeros after the point count, an exponent past two leading zeros, `1.e+400`);
   a digit after ) multiplies; equal precedence goes left to right; replacing an operator by a higher one keeps what was
