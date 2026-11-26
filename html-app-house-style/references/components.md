@@ -128,18 +128,35 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Contrast results: Pass / Fail as a word with ✓ / ✗ in `--perfect` / `--tight` (never colour alone); a ratio is cut
   off at 2 decimals, never rounded up to a pass. Short column heads (AA, AA large …) with `white-space: nowrap`.
 
-## Calculator keys and history
-- A panel with a head row (h2, `--muted` sub line, a **Hide keys** / **Show keys** button with `aria-expanded`,
-  remembered), then a wrapping flex row: the keys (`flex: none`) and the history (`flex: 1 1 300px`), so in a small
-  window the history moves under the keys instead of getting narrow.
-- Keys: grids of 52px columns, gap 6px, key 38px high, radius 9px, `--panel` + `--elev`, `--mono` 600 15px;
-  operators in `--accent`; `=` filled (`--accent`, `--accent-text`), wide keys `span 2`. A key types at the cursor of
-  the typing line; `mousedown` is prevented so the line keeps its focus and cursor. A two-way choice (Deg / Rad) is a
-  small segment of `aria-pressed` buttons, the pressed one filled with `--accent`.
-- History: a list of buttons (line on the left, answer in `--accent` on the right, `overflow-wrap: anywhere`), newest
-  first, a fixed maximum, max-height with its own scroll; an empty text says how to fill it; **Clear history**. Kept in
-  `localStorage` via safeGet / safeSet, read with try/catch and every entry checked (broken data = empty list).
-- Sums are read by the page's own parser, never `eval` / `new Function` (the house CSP blocks them anyway).
+## Calculator (like the Windows 11 calculator, Standard)
+Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windows 11 Calculator).
+- A panel with a head row (h2, `--muted` sub line, a Deg / Rad segment of `aria-pressed` buttons when the page has
+  trigonometry, and **Hide calculator** / **Show calculator** with `aria-expanded`, remembered), then a wrapping flex
+  row: the device (`flex: none`, 360px) and a History | Memory side panel (`flex: 1 1 300px`, real tabs), so in a
+  small window the side panel moves under the device instead of getting narrow.
+- Device: padding 12px, radius 16px, its own app-only tokens `--cx-*` in all three token blocks (body, number keys,
+  function keys, key ring, drop shadow, top highlight in dark, display background).
+- Display: fixed height 118px (it never grows, so the keys never move), radius 11px, 1px `--field-line` border,
+  `--accent` on focus. Two lines, right-aligned: the **small line** (13px `--muted`, one line, shrinks to 11px, then
+  starts with …) holds the calculation so far (`0.3333333333333333 ×`); the **big line** (a read-only input, 600 36px
+  `--display`, tabular figures, shrinks to 18px to fit) holds only the number typed now, the value of a function
+  (√(9) → 3), the answer, or a short fault ("Cannot divide by zero"; the keys that need a number turn grey until C,
+  CE or a digit). A Copy icon sits left of the big line; Copy gives the plain number without thousands commas.
+- Keys: a 4-column grid, gap 5px, key 52px high, radius 8px. Three shades: digits `--cx-num` (600 19px `--display`),
+  functions (% CE C ⌫ ¹/ₓ x² √x ±) `--cx-fn` (600 15px `--font`), operators `--cx-fn` in `--accent` (500 23px); `=`
+  filled `--accent` / `--accent-text`. Pressed or keyboard-lit (`.down`, 120 ms): 1px down. Above the keys a memory
+  row MC MR M+ M− MS (30px, transparent, MC and MR disabled while the memory is empty). `mousedown` is prevented so
+  the display keeps its focus.
+- Behaviour as in Windows: 16 significant digits shown and at most 16 typed; = again repeats the last operation;
+  a new operator replaces the last one; ⌫ never removes an operator; MR or an answer is replaced by the next digit.
+  Keyboard: digits, + - * / % ^, Enter or =, Backspace, Esc (C), Delete (CE), F9 (±), R, Q and @; Ctrl + V pastes a
+  number or a calculation.
+- History and Memory: lists of right-aligned buttons (calculation 13px `--muted`, answer 600 20px `--display`),
+  newest first, at most 20, max-height with its own scroll; a memory row shows MC / M+ / M− on hover or focus; an empty
+  text says how to fill it; **Clear history** / **Clear memory** go with the tab. Kept in `localStorage` via safeGet /
+  safeSet, read with try/catch and every entry checked (broken data = empty list).
+- Calculations are read by the page's own parser, never `eval` / `new Function` (the house CSP blocks them anyway);
+  exact apps calculate with BigInt fractions and test against a second implementation (Python `fractions`).
 
 ## Clocks (time zones)
 - A card per city (grid `minmax(210px, 1fr)`): name 13px 600 with a × remove button (`aria-label` "Remove …"), the
