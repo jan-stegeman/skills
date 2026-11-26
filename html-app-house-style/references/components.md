@@ -159,6 +159,12 @@ Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windo
   row's Deg / Rad / Grad) and **F-E** (`aria-pressed`). 32 digits; the big line may shrink to 13px. The small line marks
   the unit of a trig function as Windows does (sin₀ degrees, sinᵣ radians, sin₉ gradians), with a spoken copy ("sin
   degrees (30)") in an `.sr-only` live region. In a narrow window History | Memory moves under the device.
+- Scientific menus (under the memory row): two flat disclosure buttons **Trigonometry** and **Function** (32px, icon,
+  chevron that turns, `aria-expanded` + `aria-controls`). Each opens a panel over the top keys (`--panel`, `--pop`,
+  radius 12px, padding 6px, keys 78 × 42px): Trigonometry `2nd sin cos tan / hyp sec csc cot` (its own 2nd and hyp,
+  `aria-pressed`, keep the panel open; the keys change to sin⁻¹ …, sinh …), Function `|x| ⌊x⌋ ⌈x⌉ / rand →dms →deg`.
+  One panel at a time; it closes after a function, with Esc, a click outside or when the focus leaves; opened with
+  the keyboard the focus goes to its first key and Esc returns it to the button. Standard has no menus.
 - Rules taken from Windows' own engine (microsoft/calculator, MIT: rules only, no code): numbers written by its
   NumberToString (P = 16 or 32: below 1 the zeros after the point count, an exponent past two leading zeros, `1.e+400`);
   a digit after ) multiplies; equal precedence goes left to right; replacing an operator by a higher one keeps what was
