@@ -128,10 +128,11 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Contrast results: Pass / Fail as a word with ✓ / ✗ in `--perfect` / `--tight` (never colour alone); a ratio is cut
   off at 2 decimals, never rounded up to a pass. Short column heads (AA, AA large …) with `white-space: nowrap`.
 
-## Calculator (like the Windows 11 calculator, Standard)
-Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windows 11 Calculator).
-- A panel with a head row (h2, `--muted` sub line, a Deg / Rad segment of `aria-pressed` buttons when the page has
-  trigonometry, and **Hide calculator** / **Show calculator** with `aria-expanded`, remembered), then a wrapping flex
+## Calculator (like the Windows 11 calculator, Standard and Scientific)
+Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windows 11 Calculator and its source).
+- A panel with a head row (h2, real tabs **Standard | Scientific** (`.seg`, remembered), `--muted` sub line, a Deg /
+  Rad / Grad segment of `aria-pressed` buttons when the page has trigonometry, and **Hide calculator** / **Show
+  calculator** with `aria-expanded`, remembered), then a wrapping flex
   row: the device (`flex: none`, 360px) and a History | Memory side panel (`flex: 1 1 300px`, real tabs), so in a
   small window the side panel moves under the device instead of getting narrow.
 - Device: padding 12px, radius 16px, its own app-only tokens `--cx-*` in all three token blocks (body, number keys,
@@ -151,6 +152,19 @@ Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windo
   a new operator replaces the last one; ⌫ never removes an operator; MR or an answer is replaced by the next digit.
   Keyboard: digits, + - * / % ^, Enter or =, Backspace, Esc (C), Delete (CE), F9 (±), R, Q and @; Ctrl + V pastes a
   number or a calculation.
+- Scientific: the device 452px, a 5-column grid, keys 46px, 35 keys in Windows' order (2nd π e C ⌫ / x² ¹/ₓ |x| exp mod
+  / ²√x ( ) n! ÷ / xʸ 7 8 9 × / 10ˣ 4 5 6 − / log 1 2 3 + / ln ± 0 . =). **2nd** (`aria-pressed`, filled `--accent`
+  while on) swaps the first column for x³, ³√x, ʸ√x, 2ˣ, logᵧx and eˣ; one clear key shows CE while a number is typed.
+  Above the memory row two flat buttons: **DEG** (each click goes to RAD, GRAD, DEG; one angle setting with the head
+  row's Deg / Rad / Grad) and **F-E** (`aria-pressed`). 32 digits; the big line may shrink to 13px. The small line marks
+  the unit of a trig function as Windows does (sin₀ degrees, sinᵣ radians, sin₉ gradians), with a spoken copy ("sin
+  degrees (30)") in an `.sr-only` live region. In a narrow window History | Memory moves under the device.
+- Rules taken from Windows' own engine (microsoft/calculator, MIT: rules only, no code): numbers written by its
+  NumberToString (P = 16 or 32: below 1 the zeros after the point count, an exponent past two leading zeros, `1.e+400`);
+  a digit after ) multiplies; equal precedence goes left to right; replacing an operator by a higher one keeps what was
+  worked out, in brackets; = again repeats the operation worked out last; % is Y/100 after × ÷, else X × Y/100 (alone:
+  0); x mod 0 = x; MS / M+ / M− finish the typed number. Keys that the browser uses itself (F3, F5, Ctrl + G/N/R/P/L)
+  keep their job. An answer always matches the calculation that the small line shows.
 - History and Memory: lists of right-aligned buttons (calculation 13px `--muted`, answer 600 20px `--display`),
   newest first, at most 20, max-height with its own scroll; a memory row shows MC / M+ / M− on hover or focus; an empty
   text says how to fill it; **Clear history** / **Clear memory** go with the tab. Kept in `localStorage` via safeGet /
