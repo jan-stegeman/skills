@@ -69,6 +69,14 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 ## Menu and tips
 - Menu glyphs: 26px tiles, radius 7px, `--panel-2` + `--elev`, `600 11.5px var(--mono)`; the open tool's tile is
   `--accent` with `--accent-text`.
+- Group colours with line icons (GlyphGarage only, app-only tokens, the user's choice "B rustig" 2026-11-27; a sister
+  app may take it over, ask the user first): every tool a Lucide line icon (ISC; 15px, stroke 2) in its 26px tile, one
+  ink + soft tile per menu group (`--gN-ink` / `--gN-tile` in all three token blocks; light ink on a ~50 tile, dark
+  ink on the 500 hue at ~18%), a 1px inset hairline of the ink at 14%; never a status colour; the open tool keeps the
+  solid `--accent` tile. One function draws the tile for the menu, search results, Help rows and "Related tools"
+  chips; Help shows the buttons' own icons neutral grey (`--panel-2`, `--text-2`), never in a group colour. Test: an
+  own icon per tool, one colour per group, icon on tile at least 4.5:1 in light and dark. Reference: GlyphGarage
+  `TOOL_IC`, `toolGl()` and `tools/test-group-colours.json`.
 - Tips ("Good to know"): `--panel-2` + `--elev`, radius 10px, padding `14px 18px`, a 3px `--accent` left edge.
 - Toast and the screen-reader line inside dialogs (2026-11-23, PromptPrism): a modal `dialog` (`showModal()`) lies
   in the top layer, covers everything else and makes the rest of the page inert, so a `#toast` or `aria-live` line
