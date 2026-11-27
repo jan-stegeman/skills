@@ -128,6 +128,16 @@ Reference: GlyphGarage `web/app.html` (Alt codes and ASCII table). Use these in 
 - Contrast results: Pass / Fail as a word with ✓ / ✗ in `--perfect` / `--tight` (never colour alone); a ratio is cut
   off at 2 decimals, never rounded up to a pass. Short column heads (AA, AA large …) with `white-space: nowrap`.
 
+## Compare (text diff; GlyphGarage, app-only, 2026-11-27)
+- Removed and added lines use app-only tokens `--diff-del*` / `--diff-add*` (line, number cell, changed word, ink) in
+  all three token blocks, solid colours in dark (no stacked rgba): never the status tokens, because removed is not a
+  fault. Never colour alone: a − / + mark cell plus `.sr-only` "Removed" / "Added", changed words as `<del>` / `<ins>`
+  with a 1px underline. Light: add `#dcf5e3 #c3ebcf #9fdcb2 ink #11672b`, del `#fde5e1 #f9cfc8 #f3aca2 ink #922017`;
+  dark: add `#16301f #1d4029 #24653a ink #6ee59a`, del `#371b1b #4a2322 #7a3330 ink #ff9a90` (all text 4.5:1+).
+- The table of changes scrolls in its own box (`position: relative; overflow: auto`): without `position: relative`
+  the `.sr-only` texts of a wide table widen the whole page. Column heads for screen readers are zero-height `<th>`
+  with a `.sr-only` span, never a `.sr-only` `<thead>`.
+
 ## Calculator (like the Windows 11 calculator, Standard and Scientific)
 Reference: GlyphGarage, Convert page (2026-11-26, checked against the real Windows 11 Calculator and its source).
 - A panel with a head row (h2, real tabs **Standard | Scientific** (`.seg`, remembered), `--muted` sub line, a Deg /
